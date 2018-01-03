@@ -1,0 +1,96 @@
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.inverse {
+  color: white;
+  background-color: #666;
+}
+
+.centralizar-logo {
+  margin: 20px auto;
+  width: 120px;
+  height: 50px;
+}
+
+.centralizar-logo-ifrn {
+  margin: 0 auto;
+  padding: 5px 0;
+  width: 180px;
+  height: auto;
+}
+
+hr {
+  border-top: 1px solid #008000;
+  border-bottom: 1px solid #008000;
+  color: #fff;
+  background-color: #fff;
+  height: 0px;
+}
+
+ul.sidenav {
+  border-top: 2px solid #008000;
+}
+
+.sidenav li.active {
+  background-color: #008000;
+}
+
+.sidenav li.active > a {
+  color: #F0F0F0;
+}
+
+nav.top-nav {
+  height: 122px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-top: 2px solid gray;
+  border-bottom: 1px solid rgba(0,0,0,0.14);
+  background-color: transparent;
+}
+
+a.sidenav-trigger.top-nav {
+  position: absolute;
+  text-align: center;
+  height: 48px;
+  width: 48px;
+  top: 0;
+  left: 5%;
+  float: none;
+  margin-left: 1.5rem;
+  color: #008000;
+  font-size: 36px;
+  z-index: 2;
+}
+
+a.sidenav-trigger.top-nav.full {
+  line-height: 122px;
+}
+
+a.sidenav-trigger.top-nav i {
+  font-size: 32px;
+}
+
+.header {
+  margin: 25px 0;
+  color: #008000;
+  font-weight: 300;
+}
+
+.sidenav-footer-fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 300px;
+    background-color: #fff;
+    z-index: 1000;
+    border-top: 1px solid rgba(0,0,0,0.14);
+}

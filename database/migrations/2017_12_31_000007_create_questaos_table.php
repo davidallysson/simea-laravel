@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateQuestaosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('questaos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->integer('eixo_id')->unsigned();
+            $table->foreign('eixo_id')->references('id')->on('eixos')->onDelete('cascade');
+            $table->integer('alternativa_id')->unsigned();
+            $table->foreign('alternativa_id')->references('id')->on('alternativas')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('questaos');
+    }
+}
