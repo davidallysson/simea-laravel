@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Eixo;
+use App\Models\Eixo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EixoController extends Controller
 {

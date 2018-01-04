@@ -15,12 +15,20 @@ Auth::routes();
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/sobre', function () {
     return view('sobre');
-});
+})->name('sobre');
 
-Route::get('/home', function () {
-    return view('dashboard');
-});
+Route::get('/home', 'HomeController@dashboard')->name('dashboard');
+
+Route::resource('campus', 'CampusController');
+Route::resource('diretoria', 'DiretoriaController');
+Route::resource('curso', 'CursoController');
+Route::resource('turma', 'TurmaController');
+Route::resource('eixo', 'EixoController');
+Route::resource('aluno', 'PessoaController');
+Route::resource('usuario', 'UserController');
+Route::resource('questao', 'QuestaoController');
+Route::resource('questionario', 'QuestionarioController');

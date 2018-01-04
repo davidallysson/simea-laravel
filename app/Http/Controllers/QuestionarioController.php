@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Questionario;
+use App\Models\Questionario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class QuestionarioController extends Controller
 {

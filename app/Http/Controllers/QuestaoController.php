@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Questao;
+use App\Models\Questao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class QuestaoController extends Controller
 {

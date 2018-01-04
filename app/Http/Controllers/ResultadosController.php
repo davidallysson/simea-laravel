@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Resultados;
+use App\Models\Resultados;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ResultadosController extends Controller
 {

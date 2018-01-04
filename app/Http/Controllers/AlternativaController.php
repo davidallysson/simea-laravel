@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Alternativa;
+use App\Models\Alternativa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AlternativaController extends Controller
 {

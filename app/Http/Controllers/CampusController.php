@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Campus;
+use App\Models\Campus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CampusController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,7 @@ class CampusController extends Controller
      */
     public function index()
     {
-        //
+        return view('campus.index', ['campuses' => Campus::all()]);
     }
 
     /**
@@ -24,7 +35,7 @@ class CampusController extends Controller
      */
     public function create()
     {
-        //
+        return view('campus.create');
     }
 
     /**
@@ -35,7 +46,11 @@ class CampusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campus = new Campus;
+        $campus->nome = $request->nome;
+        $campus->save();
+
+        return Redirect::route('campus.index');
     }
 
     /**
@@ -46,7 +61,7 @@ class CampusController extends Controller
      */
     public function show(Campus $campus)
     {
-        //
+        // Not used
     }
 
     /**
@@ -57,7 +72,7 @@ class CampusController extends Controller
      */
     public function edit(Campus $campus)
     {
-        //
+        return view('campus.edit', ['campus' => Campus::findOrFail($campus->id)]);
     }
 
     /**
@@ -69,7 +84,11 @@ class CampusController extends Controller
      */
     public function update(Request $request, Campus $campus)
     {
-        //
+        $campus = Campus::findOrFail($campus->id);
+        $campus->nome = $request->nome;
+        $campus->save();
+
+        return Redirect::route('campus.index');
     }
 
     /**
@@ -80,6 +99,8 @@ class CampusController extends Controller
      */
     public function destroy(Campus $campus)
     {
-        //
+        $campus->delete();
+
+        return Redirect::route('campus.index');
     }
 }

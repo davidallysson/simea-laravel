@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Diretoria;
+use App\Models\Campus;
+use App\Models\Diretoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DiretoriaController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class DiretoriaController extends Controller
      */
     public function index()
     {
-        //
+        return view('diretoria.index', ['diretorias' => Diretoria::all()]);
     }
 
     /**
@@ -24,7 +36,7 @@ class DiretoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('diretoria.create', ['campuses' => Campus::all()]);
     }
 
     /**
@@ -35,7 +47,12 @@ class DiretoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $diretoria = new Diretoria;
+        $diretoria->nome = $request->nome;
+        $diretoria->campus_id = $request->campus_id;
+        $diretoria->save();
+
+        return Redirect::route('diretoria.index');
     }
 
     /**
@@ -57,7 +74,10 @@ class DiretoriaController extends Controller
      */
     public function edit(Diretoria $diretoria)
     {
-        //
+        return view('diretoria.edit', [
+          'diretoria' => Diretoria::findOrFail($diretoria->id),
+          'campuses' => Campus::all()
+        ]);
     }
 
     /**
@@ -69,7 +89,12 @@ class DiretoriaController extends Controller
      */
     public function update(Request $request, Diretoria $diretoria)
     {
-        //
+        $diretoria = Diretoria::findOrFail($diretoria->id);
+        $diretoria->nome = $request->nome;
+        $diretoria->campus_id = $request->campus_id;
+        $diretoria->save();
+
+        return Redirect::route('diretoria.index');
     }
 
     /**
@@ -80,6 +105,8 @@ class DiretoriaController extends Controller
      */
     public function destroy(Diretoria $diretoria)
     {
-        //
+      $diretoria->delete();
+
+      return Redirect::route('diretoria.index');
     }
 }

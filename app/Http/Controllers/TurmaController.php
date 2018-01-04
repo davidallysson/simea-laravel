@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Turma;
+use App\Models\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TurmaController extends Controller
 {
