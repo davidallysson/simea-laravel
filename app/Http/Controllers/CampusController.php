@@ -72,7 +72,7 @@ class CampusController extends Controller
      */
     public function edit(Campus $campus)
     {
-        return view('campus.edit', ['campus' => Campus::findOrFail($campus->id)]);
+        return view('campus.edit', ['campus' => $campus]);
     }
 
     /**
@@ -84,7 +84,6 @@ class CampusController extends Controller
      */
     public function update(Request $request, Campus $campus)
     {
-        $campus = Campus::findOrFail($campus->id);
         $campus->nome = $request->nome;
         $campus->save();
 

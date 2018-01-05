@@ -72,11 +72,11 @@ class DiretoriaController extends Controller
      * @param  \App\Diretoria  $diretoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diretoria $diretoria)
+    public function edit(int $id)
     {
         return view('diretoria.edit', [
-          'diretoria' => Diretoria::findOrFail($diretoria->id),
-          'campuses' => Campus::all()
+          'campuses' => Campus::all(),
+          'diretoria' => Diretoria::findOrFail($id)
         ]);
     }
 
@@ -87,9 +87,9 @@ class DiretoriaController extends Controller
      * @param  \App\Diretoria  $diretoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diretoria $diretoria)
+    public function update(Request $request, int $id)
     {
-        $diretoria = Diretoria::findOrFail($diretoria->id);
+        $diretoria = Diretoria::findOrFail($id);
         $diretoria->nome = $request->nome;
         $diretoria->campus_id = $request->campus_id;
         $diretoria->save();
@@ -103,8 +103,9 @@ class DiretoriaController extends Controller
      * @param  \App\Diretoria  $diretoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diretoria $diretoria)
+    public function destroy(int $id)
     {
+      $diretoria = Diretoria::findOrFail($id);
       $diretoria->delete();
 
       return Redirect::route('diretoria.index');

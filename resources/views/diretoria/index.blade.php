@@ -22,17 +22,17 @@
             @forelse ($diretorias as $diretoria)
             <tr>
               <td>{{ $diretoria->nome }}</td>
-              <td>{{ DB::table('campuses')->where('id', $diretoria->campus_id)->value('nome') }}</td>
+              <td>{{ $diretoria->campus->nome }}</td>
               <td>
-                <a href="{{ route('diretoria.edit', $diretoria) }}" class="btn btn-flat waves-effect waves-green">
+                <a href="{{ route('diretoria.edit', $diretoria->id) }}" class="btn btn-flat waves-effect waves-green">
                   <i class="far fa-edit fa-lg"></i>
                 </a>
-                <a href="{{ route('diretoria.destroy', $diretoria) }}" class="btn btn-flat waves-effect waves-green"
+                <a href="{{ route('diretoria.destroy', $diretoria->id) }}" class="btn btn-flat waves-effect waves-green"
                 onclick="event.preventDefault(); document.getElementById('{{ $diretoria->id }}').submit();">
                   <i class="far fa-trash-alt fa-lg"></i>
                 </a>
 
-                <form id="{{ $diretoria->id }}" action="{{ route('diretoria.destroy', $diretoria) }}" method="POST" style="display: none;">
+                <form id="{{ $diretoria->id }}" action="{{ route('diretoria.destroy', $diretoria->id) }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                     <input name="_method" type="hidden" value="DELETE"/>
                     <input class="btn btn-danger" type="submit" value="Delete"/>
