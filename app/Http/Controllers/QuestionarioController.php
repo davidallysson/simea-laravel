@@ -9,13 +9,23 @@ use Illuminate\Support\Facades\Redirect;
 class QuestionarioController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('questionario.index', ['questionarios' => Questionario::all()]);
     }
 
     /**
@@ -25,7 +35,7 @@ class QuestionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('questionario.create');
     }
 
     /**
@@ -36,7 +46,16 @@ class QuestionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $questionario = new Questionario;
+        $questionario->titulo = $request->titulo;
+        if ($request->disponivel == "on") {
+          $questionario->disponivel = 1;
+        } else {
+          $questionario->disponivel = 0;
+        }
+        $questionario->save();
+
+        return Redirect::route('questionario.index');
     }
 
     /**
@@ -53,34 +72,46 @@ class QuestionarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Questionario  $questionario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questionario $questionario)
+    public function edit(int $id)
     {
-        //
+        return view('questionario.edit', ['questionario' => Questionario::findOrFail($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Questionario  $questionario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questionario $questionario)
+    public function update(Request $request, int $id)
     {
-        //
+        $questionario = Questionario::findOrFail($id);
+        $questionario->titulo = $request->titulo;
+        if ($request->disponivel == "on") {
+          $questionario->disponivel = 1;
+        } else {
+          $questionario->disponivel = 0;
+        }
+        $questionario->save();
+
+        return Redirect::route('questionario.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Questionario  $questionario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questionario $questionario)
+    public function destroy(int $id)
     {
-        //
+        $questionario = Questionario::findOrFail($id);
+        $questionario->delete();
+
+        return Redirect::route('questionario.index');
     }
 }

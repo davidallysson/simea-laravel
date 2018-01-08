@@ -6,7 +6,7 @@
   <body>
 
     <nav class="top-nav">
-      <div class="container">
+      <div class="container-fluid">
         <div class="nav-wrapper">
           <div class="row">
             <div class="col s12 m12 l7 offset-l3">
@@ -23,9 +23,9 @@
     </header>
 
     <main>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col s12 m10 offset-m1 l10 offset-l3">
+          <div class="col s12 m10 offset-m1 @yield('column', 'l9 offset-l3')">
             @yield('content')
           </div>
         </div>

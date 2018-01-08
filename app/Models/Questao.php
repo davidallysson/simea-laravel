@@ -12,7 +12,7 @@ class Questao extends Model
    * @var array
    */
   protected $fillable = [
-      'titulo', 'eixo_id', 'alternativa_id'
+      'titulo', 'eixo_id', 'questionario_id'
   ];
 
   public function eixo()
@@ -23,5 +23,10 @@ class Questao extends Model
   public function alternativas()
   {
       return $this->hasMany('App\Models\Alternativa');
+  }
+
+  public function questionario()
+  {
+      return $this->belongsTo('App\Models\Questionario');
   }
 }

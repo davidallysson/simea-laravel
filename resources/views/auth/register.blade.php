@@ -36,11 +36,11 @@
         <div class="col s12">
           <p>
             <label>
-              <input id='tipo_id' name="tipo_id" type="radio" value="1" checked />
+              <input id='tipo_id_aluno' name="tipo_id" type="radio" value="1" checked />
               <span>Aluno</span>
             </label>
             <label>
-              <input id='tipo_id' name="tipo_id" type="radio" value="2" />
+              <input id='tipo_id_adm' name="tipo_id" type="radio" value="2" />
               <span>Administrador</span>
             </label>
           </p>

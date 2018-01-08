@@ -69,7 +69,7 @@ class DiretoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Diretoria  $diretoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
@@ -84,7 +84,7 @@ class DiretoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Diretoria  $diretoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
@@ -100,7 +100,7 @@ class DiretoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Diretoria  $diretoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)

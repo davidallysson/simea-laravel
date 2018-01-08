@@ -12,7 +12,7 @@ class Alternativa extends Model
    * @var array
    */
   protected $fillable = [
-      'letra', 'peso'
+      'alternativa', 'letra', 'peso', 'questao_id'
   ];
 
   public function questao()

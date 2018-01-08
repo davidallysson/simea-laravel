@@ -18,8 +18,8 @@ class CreateQuestaosTable extends Migration
             $table->string('titulo');
             $table->integer('eixo_id')->unsigned();
             $table->foreign('eixo_id')->references('id')->on('eixos')->onDelete('cascade');
-            $table->integer('alternativa_id')->unsigned();
-            $table->foreign('alternativa_id')->references('id')->on('alternativas')->onDelete('cascade');
+            $table->integer('questionario_id')->unsigned();
+            $table->foreign('questionario_id')->references('id')->on('questionarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

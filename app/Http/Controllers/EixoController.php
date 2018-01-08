@@ -9,13 +9,23 @@ use Illuminate\Support\Facades\Redirect;
 class EixoController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('eixo.index', ['eixos' => Eixo::all()]);
     }
 
     /**
@@ -25,7 +35,7 @@ class EixoController extends Controller
      */
     public function create()
     {
-        //
+        return view('eixo.create');
     }
 
     /**
@@ -36,7 +46,11 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $eixo = new Eixo;
+        $eixo->nome = $request->nome;
+        $eixo->save();
+
+        return Redirect::route('eixo.index');
     }
 
     /**
@@ -53,34 +67,41 @@ class EixoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Eixo  $eixo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Eixo $eixo)
+    public function edit(int $id)
     {
-        //
+        return view('eixo.edit', ['eixo' => Eixo::findOrFail($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Eixo  $eixo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Eixo $eixo)
+    public function update(Request $request, int $id)
     {
-        //
+        $eixo = Eixo::findOrFail($id);
+        $eixo->nome = $request->nome;
+        $eixo->save();
+
+        return Redirect::route('eixo.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Eixo  $eixo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Eixo $eixo)
+    public function destroy(int $id)
     {
-        //
+        $eixo = Eixo::findOrFail($id);
+        $eixo->delete();
+
+        return Redirect::route('eixo.index');
     }
 }

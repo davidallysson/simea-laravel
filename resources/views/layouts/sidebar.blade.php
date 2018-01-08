@@ -1,4 +1,4 @@
-<a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only">
+<a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full">
   <i class="material-icons">menu</i>
 </a>
 <ul id="nav-mobile" class="sidenav sidenav-fixed">

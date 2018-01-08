@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Turma;
+use App\Models\Curso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class TurmaController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,7 @@ class TurmaController extends Controller
      */
     public function index()
     {
-        //
+        return view('turma.index', ['turmas' => Turma::all()]);
     }
 
     /**
@@ -25,7 +36,7 @@ class TurmaController extends Controller
      */
     public function create()
     {
-        //
+        return view('turma.create', ['cursos' => Curso::all()]);
     }
 
     /**
@@ -36,7 +47,12 @@ class TurmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $turma = new Turma;
+        $turma->nome = $request->nome;
+        $turma->curso_id = $request->curso_id;
+        $turma->save();
+
+        return Redirect::route('turma.index');
     }
 
     /**
@@ -53,34 +69,45 @@ class TurmaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Turma  $turma
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Turma $turma)
+    public function edit(int $id)
     {
-        //
+      return view('turma.edit', [
+        'cursos' => Curso::all(),
+        'turma' => Turma::findOrFail($id)
+      ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Turma  $turma
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Turma $turma)
+    public function update(Request $request, int $id)
     {
-        //
+        $turma = Turma::findOrFail($id);
+        $turma->nome = $request->nome;
+        $turma->curso_id = $request->curso_id;
+        $turma->save();
+
+        return Redirect::route('turma.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Turma  $turma
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Turma $turma)
+    public function destroy(int $id)
     {
-        //
+        $turma = Turma::findOrFail($id);
+        $turma->delete();
+
+        return Redirect::route('turma.index');
     }
 }

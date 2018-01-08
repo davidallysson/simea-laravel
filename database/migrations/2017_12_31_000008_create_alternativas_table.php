@@ -15,8 +15,11 @@ class CreateAlternativasTable extends Migration
     {
         Schema::create('alternativas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('alternativa');
             $table->string('letra');
             $table->integer('peso');
+            $table->integer('questao_id')->unsigned();
+            $table->foreign('questao_id')->references('id')->on('questaos')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class Questionario extends Model
    * @var array
    */
   protected $fillable = [
-      'titulo', 'disponivel', 'questao_id'
+      'titulo', 'disponivel'
   ];
 
   public function resultado()
