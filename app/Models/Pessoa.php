@@ -12,7 +12,7 @@ class Pessoa extends Model
    * @var array
    */
   protected $fillable = [
-      'nome', 'sexo', 'telefone', 'matricula', 'dataNascimento', 'estadoCivil', 'raca', 'renda', 'turma_id'
+      'nome', 'rg', 'cpf', 'sexo', 'telefone', 'matricula', 'dataNascimento', 'estadoCivil', 'raca', 'renda', 'turma_id'
   ];
 
   public function turma()

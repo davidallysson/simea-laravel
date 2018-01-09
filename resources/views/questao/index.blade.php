@@ -24,7 +24,7 @@
               <td>{{ $questao->titulo }}</td>
               <td>{{ $questao->eixo->nome }}</td>
               <td>
-                <a id="show" href="{{ route('questao.show', $questao->id) }}" class="btn btn-flat waves-effect waves-green">
+                <a href="{{ route('questao.show', $questao->id) }}" class="btn btn-flat waves-effect waves-green">
                   <i class="fas fa-eye fa-lg"></i>
                 </a>
                 <a href="{{ route('questao.edit', $questao->id) }}" class="btn btn-flat waves-effect waves-green">

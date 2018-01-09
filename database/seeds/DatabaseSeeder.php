@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         DB::table('tiposdeusers')->insert( ['descricao' => 'aluno'] );
         DB::table('tiposdeusers')->insert( ['descricao' => 'administrador'] );
 
+        DB::table('campuses')->insert( ['nome' => 'Natal-Central'] );
+
         DB::table('eixos')->insert( ['nome' => 'Individual'] );
         DB::table('eixos')->insert( ['nome' => 'Familiar'] );
         DB::table('eixos')->insert( ['nome' => 'Intraescolar'] );
