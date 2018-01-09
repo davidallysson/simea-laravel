@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         DB::table('eixos')->insert( ['nome' => 'Área de Formação'] );
         DB::table('eixos')->insert( ['nome' => 'Institucional'] );
 
+        DB::table('questionarios')->insert( ['titulo' => 'Questionario Teste', 'disponivel' => 1] );
+
         DB::table('users')->insert([
             'name' => 'David Allysson Pereira Moreira',
             'email' => 'davidmoreirainformatica@gmail.com',

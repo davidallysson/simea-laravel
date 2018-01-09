@@ -32,27 +32,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12 m6 l4">
-            <select id="estadoCivil" name="estadoCivil">
-              <option value="" disabled selected>Escolha uma opção</option>
-              <option value="Solteiro">Solteiro</option>
-              <option value="Casado">Casado</option>
-              <option value="Divorciado">Divorciado</option>
-              <option value="Viúvo">Viúvo</option>
-            </select>
-            <label>Estado Civil</label>
+          <div class="input-field col s12 m4">
+            <input id="email" type="email" name="email" placeholder="Email" required>
+            <label for="email">Email</label>
           </div>
 
           <div class="input-field col s12 m6 l3">
-            <select id="raca" name="raca">
+            <select id="turma_id" name="turma_id">
               <option value="" disabled selected>Escolha uma opção</option>
-              <option value="Branco">Branco</option>
-              <option value="Preto">Preto</option>
-              <option value="Pardo">Pardo</option>
-              <option value="Indígena">Indígena</option>
-              <option value="Quilombola">Quilombola</option>
+              @foreach ($turmas as $turma)
+                <option value="{{ $turma->id }}">{{ $turma->nome }}</option>
+              @endforeach
             </select>
-            <label>Raça</label>
+            <label>Turma</label>
           </div>
 
           <div class="input-field col s12 m6 l2">
@@ -61,7 +53,7 @@
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input class="datepicker" placeholder="15/8/1990" id="dataNascimento" type="text" name="dataNascimento">
+            <input class="datepicker" placeholder="1990-12-20" id="dataNascimento" type="text" name="dataNascimento">
             <label for="dataNascimento">Data de Nascimento</label>
           </div>
         </div>
@@ -77,14 +69,37 @@
             <label>Renda Familiar</label>
           </div>
 
-          <div class="input-field col s12 m6 l4">
-            <select id="turma_id" name="turma_id">
+          <div class="input-field col s12 m6 l3">
+            <select id="raca" name="raca">
               <option value="" disabled selected>Escolha uma opção</option>
-              @foreach ($turmas as $turma)
-                <option value="{{ $turma->id }}">{{ $turma->nome }}</option>
-              @endforeach
+              <option value="Branco">Branco</option>
+              <option value="Preto">Preto</option>
+              <option value="Pardo">Pardo</option>
+              <option value="Indígena">Indígena</option>
+              <option value="Quilombola">Quilombola</option>
             </select>
-            <label>Turma</label>
+            <label>Raça</label>
+          </div>
+
+          <div class="input-field col s12 m6 l4">
+            <select id="estadoCivil" name="estadoCivil">
+              <option value="" disabled selected>Escolha uma opção</option>
+              <option value="Solteiro">Solteiro</option>
+              <option value="Casado">Casado</option>
+              <option value="Divorciado">Divorciado</option>
+              <option value="Viúvo">Viúvo</option>
+            </select>
+            <label>Estado Civil</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l4">
+            <input id="password" type="password" name="password" placeholder="Senha" required>
+            <label for="password">Senha</label>
+          </div>
+          <div class="input-field col s12 m6 l4">
+            <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirmar Senha" required>
+            <label for="password-confirm">Confirmar Senha</label>
           </div>
 
           <div class="col s12 m6 l2">
@@ -99,7 +114,10 @@
               </label>
             </p>
           </div>
+
+          <input id='tipo_id' name="tipo_id" type="hidden" value="1" />
         </div>
+        <br>
         <div class="row">
           <div class="col s12 m6">
             <input class="btn btn-primary" type="submit" value="Cadastrar"/>

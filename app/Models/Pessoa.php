@@ -12,7 +12,7 @@ class Pessoa extends Model
    * @var array
    */
   protected $fillable = [
-      'nome', 'rg', 'cpf', 'sexo', 'telefone', 'matricula', 'dataNascimento', 'estadoCivil', 'raca', 'renda', 'turma_id'
+      'nome', 'rg', 'cpf', 'sexo', 'telefone', 'matricula', 'dataNascimento', 'estadoCivil', 'raca', 'renda', 'turma_id', 'user_id'
   ];
 
   public function turma()
@@ -23,6 +23,11 @@ class Pessoa extends Model
   public function resultados()
   {
       return $this->hasMany('App\Models\Resultado');
+  }
+
+  public function user()
+  {
+      return $this->belongsTo('App\User');
   }
 
 }

@@ -28,13 +28,19 @@
     </li>
 
     <li class="bold">
-      <a href="{{ route('register') }}" class="waves-effect waves-green">
+      <a href="{{ route('aluno.create') }}" class="waves-effect waves-green">
         <i class="fas fa-user-plus fa-lg" style="margin: 0 15px;"></i> Registrar-se
       </a>
     </li>
   @else
 
   @if(Auth::user()->tipo_id==1)
+    <li class="bold">
+      <a href="{{ route('perfil') }}" class="waves-effect waves-green">
+        <i class="fas fa-user fa-lg" style="margin: 0 15px;"></i> Perfil
+      </a>
+    </li>
+
     <li class="bold">
       <a href="#quiz" class="waves-effect waves-green">
         <i class="far fa-edit fa-lg" style="margin: 0 15px;"></i> Quiz
@@ -57,7 +63,6 @@
               <li><a href="{{ route('turma.index') }}">Turmas</a></li>
               <li><a href="{{ route('eixo.index') }}">Eixos</a></li>
               <li><a href="{{ route('aluno.index') }}">Alunos</a></li>
-              <li><a href="{{ route('usuario.index') }}">Usuários</a></li>
               <li><a href="{{ route('questao.index') }}">Questões</a></li>
               <li><a href="{{ route('questionario.index') }}">Questionários</a></li>
             </ul>
@@ -79,12 +84,6 @@
     </li>
   @endif
   @endguest
-
-  <li class="bold">
-    <a href="{{ route('sobre') }}" class="waves-effect waves-green">
-      <i class="fas fa-question-circle fa-lg" style="margin: 0 15px;"></i> Sobre
-    </a>
-  </li>
 
   @if(Auth::user())
     <li class="bold">

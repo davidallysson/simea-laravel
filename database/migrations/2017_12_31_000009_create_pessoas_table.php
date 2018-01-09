@@ -27,6 +27,8 @@ class CreatePessoasTable extends Migration
             $table->string('renda');
             $table->integer('turma_id')->unsigned();
             $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

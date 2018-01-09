@@ -33,27 +33,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12 m6 l4">
-            <select id="estadoCivil" name="estadoCivil">
-              <option value="" disabled>Escolha uma opção</option>
-              <option value="Solteiro" {{ $aluno->estadoCivil == "Solteiro" ? 'selected' : '' }}>Solteiro</option>
-              <option value="Casado" {{ $aluno->estadoCivil == "Casado" ? 'selected' : '' }}>Casado</option>
-              <option value="Divorciado" {{ $aluno->estadoCivil == "Divorciado" ? 'selected' : '' }}>Divorciado</option>
-              <option value="Viúvo" {{ $aluno->estadoCivil == "Viúvo" ? 'selected' : '' }}>Viúvo</option>
-            </select>
-            <label>Estado Civil</label>
+          <div class="input-field col s12 m4">
+            <input id="email" type="email" name="email" placeholder="Email" value="{{ $aluno->user->email }}" required>
+            <label for="email">Email</label>
           </div>
 
           <div class="input-field col s12 m6 l3">
-            <select id="raca" name="raca">
-              <option value="" disabled>Escolha uma opção</option>
-              <option value="Branco" {{ $aluno->raca == "Branco" ? 'selected' : '' }}>Branco</option>
-              <option value="Preto" {{ $aluno->raca == "Preto" ? 'selected' : '' }}>Preto</option>
-              <option value="Pardo" {{ $aluno->raca == "Pardo" ? 'selected' : '' }}>Pardo</option>
-              <option value="Indígena" {{ $aluno->raca == "Indígena" ? 'selected' : '' }}>Indígena</option>
-              <option value="Quilombola" {{ $aluno->raca == "Quilombola" ? 'selected' : '' }}>Quilombola</option>
+            <select id="turma_id" name="turma_id">
+              <option value="" disabled selected>Escolha uma opção</option>
+              @foreach ($turmas as $turma)
+                <option value="{{ $turma->id }}" {{ $turma->id == $aluno->turma_id ? 'selected' : '' }}>{{ $turma->nome }}</option>
+              @endforeach
             </select>
-            <label>Raça</label>
+            <label>Turma</label>
           </div>
 
           <div class="input-field col s12 m6 l2">
@@ -62,7 +54,7 @@
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input class="datepicker" placeholder="15/8/1990" id="dataNascimento" type="text" name="dataNascimento" value="{{ $aluno->dataNascimento }}">
+            <input class="datepicker" placeholder="1990-12-20" id="dataNascimento" type="text" name="dataNascimento" value="{{ $aluno->dataNascimento }}">
             <label for="dataNascimento">Data de Nascimento</label>
           </div>
         </div>
@@ -78,16 +70,42 @@
             <label>Renda Familiar</label>
           </div>
 
-          <div class="input-field col s12 m6 l4">
-            <select id="turma_id" name="turma_id">
-              <option value="" disabled selected>Escolha uma opção</option>
-              @foreach ($turmas as $turma)
-                <option value="{{ $turma->id }}" {{ $turma->id == $aluno->turma_id ? 'selected' : '' }}>{{ $turma->nome }}</option>
-              @endforeach
+          <div class="input-field col s12 m6 l3">
+            <select id="raca" name="raca">
+              <option value="" disabled>Escolha uma opção</option>
+              <option value="Branco" {{ $aluno->raca == "Branco" ? 'selected' : '' }}>Branco</option>
+              <option value="Preto" {{ $aluno->raca == "Preto" ? 'selected' : '' }}>Preto</option>
+              <option value="Pardo" {{ $aluno->raca == "Pardo" ? 'selected' : '' }}>Pardo</option>
+              <option value="Indígena" {{ $aluno->raca == "Indígena" ? 'selected' : '' }}>Indígena</option>
+              <option value="Quilombola" {{ $aluno->raca == "Quilombola" ? 'selected' : '' }}>Quilombola</option>
             </select>
-            <label>Turma</label>
+            <label>Raça</label>
           </div>
 
+          <div class="input-field col s12 m6 l4">
+            <select id="estadoCivil" name="estadoCivil">
+              <option value="" disabled>Escolha uma opção</option>
+              <option value="Solteiro" {{ $aluno->estadoCivil == "Solteiro" ? 'selected' : '' }}>Solteiro</option>
+              <option value="Casado" {{ $aluno->estadoCivil == "Casado" ? 'selected' : '' }}>Casado</option>
+              <option value="Divorciado" {{ $aluno->estadoCivil == "Divorciado" ? 'selected' : '' }}>Divorciado</option>
+              <option value="Viúvo" {{ $aluno->estadoCivil == "Viúvo" ? 'selected' : '' }}>Viúvo</option>
+            </select>
+            <label>Estado Civil</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m3">
+            <input id="password" type="password" name="old_password" placeholder="Senha Antiga" required>
+            <label for="password">Senha Antiga</label>
+          </div>
+          <div class="input-field col s12 m3">
+            <input id="password" type="password" name="password" placeholder="Nova Senha" required>
+            <label for="password">Nova Senha</label>
+          </div>
+          <div class="input-field col s12 m3">
+            <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirmar Nova Senha" required>
+            <label for="password-confirm">Confirmar Senha</label>
+          </div>
           <div class="col s12 m6 l2">
             <p>
               <label>
@@ -100,6 +118,7 @@
               </label>
             </p>
           </div>
+          <input id='tipo_id' name="tipo_id" type="hidden" value="1" />
         </div>
         <div class="row">
           <div class="col s12 m6">

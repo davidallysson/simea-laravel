@@ -32,20 +32,7 @@
           <label for="password-confirm">Confirmar Senha</label>
         </div>
       </div>
-      <div class="row">
-        <div class="col s12">
-          <p>
-            <label>
-              <input id='tipo_id_aluno' name="tipo_id" type="radio" value="1" checked />
-              <span>Aluno</span>
-            </label>
-            <label>
-              <input id='tipo_id_adm' name="tipo_id" type="radio" value="2" />
-              <span>Administrador</span>
-            </label>
-          </p>
-        </div>
-      </div>
+      <input id='tipo_id' name="tipo_id" type="hidden" value="1" />
       <div class="row">
         <div class="input-field col s12">
           <button type="submit" class="btn btn-primary">Cadastrar</button>
