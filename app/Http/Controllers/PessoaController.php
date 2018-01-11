@@ -75,6 +75,7 @@ class PessoaController extends Controller
         $aluno->estadoCivil = $request->estadoCivil;
         $aluno->raca = $request->raca;
         $aluno->renda = $request->renda;
+        $aluno->vinculo = 1;
         $aluno->turma_id = $request->turma_id;
         $aluno->user_id = $user->id;
 
@@ -142,6 +143,7 @@ class PessoaController extends Controller
           $aluno->estadoCivil = $request->estadoCivil;
           $aluno->raca = $request->raca;
           $aluno->renda = $request->renda;
+          $aluno->vinculo = $request->vinculo;
           $aluno->turma_id = $request->turma_id;
           $aluno->user_id = $user->id;
 
@@ -167,6 +169,11 @@ class PessoaController extends Controller
         $user->delete();
 
         return Redirect::route('aluno.index');
+    }
+
+    public function perfil()
+    {
+        return view('aluno.perfil', ['aluno' => Pessoa::where('user_id', Auth::user()->id)->first()]);
     }
 
 }

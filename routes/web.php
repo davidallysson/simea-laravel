@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/perfil', 'PessoaController@perfil')->name('perfil');
+
 Route::get('/home', 'HomeController@dashboard')->name('dashboard');
 
 Route::resource('campus', 'CampusController');
@@ -28,6 +30,10 @@ Route::resource('aluno', 'PessoaController');
 Route::resource('questao', 'QuestaoController');
 Route::resource('questionario', 'QuestionarioController');
 
-Route::get('/perfil', function () {
-    return view('aluno.perfil');
-})->name('perfil');
+Route::get('/vinculo/status', 'HomeController@status')->name('vinculo.status');
+Route::post('/vinculo/verificar', 'HomeController@verificar')->name('vinculo.verificar');
+
+Route::get('/quiz/escolher', 'HomeController@escolher')->name('quiz.escolher');
+
+#
+#

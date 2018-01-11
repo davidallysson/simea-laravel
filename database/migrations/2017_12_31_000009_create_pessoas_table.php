@@ -25,6 +25,7 @@ class CreatePessoasTable extends Migration
             $table->string('estadoCivil');
             $table->string('raca');
             $table->string('renda');
+            $table->boolean('vinculo');
             $table->integer('turma_id')->unsigned();
             $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
             $table->integer('user_id')->unsigned();

@@ -15,6 +15,7 @@
         <span><b>CPF:</b> {{ $aluno->cpf }} </span><br>
         <span><b>Matrícula:</b> {{ $aluno->matricula }} </span><br>
         <span><b>Telefone:</b> {{ $aluno->telefone }} </span><br>
+        <span><b>Email:</b> {{ $aluno->user->email }} </span><br>
         <span><b>Data de Nascimento:</b> {{ $aluno->dataNascimento }} </span><br>
         <span><b>Estado Civil:</b> {{ $aluno->estadoCivil }} </span><br>
         <span><b>Etnia:</b> {{ $aluno->raca }} </span><br>

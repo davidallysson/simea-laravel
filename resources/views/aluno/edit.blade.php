@@ -82,7 +82,7 @@
             <label>Raça</label>
           </div>
 
-          <div class="input-field col s12 m6 l4">
+          <div class="input-field col s12 m6 l2">
             <select id="estadoCivil" name="estadoCivil">
               <option value="" disabled>Escolha uma opção</option>
               <option value="Solteiro" {{ $aluno->estadoCivil == "Solteiro" ? 'selected' : '' }}>Solteiro</option>
@@ -91,6 +91,15 @@
               <option value="Viúvo" {{ $aluno->estadoCivil == "Viúvo" ? 'selected' : '' }}>Viúvo</option>
             </select>
             <label>Estado Civil</label>
+          </div>
+
+          <div class="col s12 m6 l2 switch">
+            <label>
+              Inativo
+              <input type="checkbox" {{ $aluno->vinculo == 1 ? 'checked' : '' }}>
+              <span class="lever"></span>
+              Ativo
+            </label>
           </div>
         </div>
         <div class="row">

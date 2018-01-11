@@ -14,7 +14,7 @@
             <tr>
                 <th>Titulo</th>
                 <th>Eixo</th>
-                <th>Ações</th>
+                <th style="width: 30%;">Ações</th>
             </tr>
           </thead>
 
