@@ -17,7 +17,7 @@ class Questionario extends Model
 
   public function resultado()
   {
-      return $this->hasMany('App\Models\Resultado');
+      return $this->hasMany('App\Models\Resultados');
   }
 
   public function questoes()

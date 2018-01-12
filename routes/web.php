@@ -13,13 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/perfil', 'PessoaController@perfil')->name('perfil');
+Route::get('/', function () { return view('home'); } )->name('home');
 
 Route::get('/home', 'HomeController@dashboard')->name('dashboard');
+Route::get('/perfil', 'PessoaController@perfil')->name('perfil');
 
 Route::resource('campus', 'CampusController');
 Route::resource('diretoria', 'DiretoriaController');
@@ -34,6 +31,7 @@ Route::get('/vinculo/status', 'HomeController@status')->name('vinculo.status');
 Route::post('/vinculo/verificar', 'HomeController@verificar')->name('vinculo.verificar');
 
 Route::get('/quiz/escolher', 'HomeController@escolher')->name('quiz.escolher');
+Route::get('/quiz/{id}/iniciar/', 'HomeController@iniciar')->name('quiz.iniciar');
+Route::post('/quiz/resultado', 'HomeController@resultado')->name('quiz.resultado');
 
-#
 #

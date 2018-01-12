@@ -22,7 +22,7 @@ class Pessoa extends Model
 
   public function resultados()
   {
-      return $this->hasMany('App\Models\Resultado');
+      return $this->hasMany('App\Models\Resultados');
   }
 
   public function user()

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
+use App\Models\Questao;
+use App\Models\Resultados;
 use App\Models\Questionario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +32,11 @@ class HomeController extends Controller
         return view('dashboard');
     }
 
+    /**
+     * Mostra a view de atualização de vínculo
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function status()
     {
         return view('quiz.status');
@@ -59,10 +66,72 @@ class HomeController extends Controller
         $aluno = Pessoa::where('user_id', Auth::user()->id)->first();
 
         if ($aluno->vinculo == 1) {
-          return view('quiz.questionarioAtivo', ['questionarios' => Questionario::where('disponivel', 1)->get()]);
-        } else {
+          return view('quiz.questionarioAtivo', [
+            'questionarios' => Questionario::where('disponivel', 1)->get(),
+            'resultados' => Resultados::where('pessoa_id', Auth::user()->pessoa->id)->get()
+          ]);
+        } else if ($aluno->vinculo == 0){
           return view('quiz.questionarioInativo');
         }
+    }
+
+    /**
+    * Inicia o questionário e recebe o $id do questionário como parâmetro.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function iniciar(int $id)
+    {
+        //Descobre se o usuário já havia respondido alguma pergunta referente a aquele questionário.
+        $resultado = Resultados::where('pessoa_id', Auth::user()->pessoa->id)->where('questionario_id', $id)->first();
+        if ($resultado == null) {
+          $resultado_id = 0; // Caso não é enviado valor '0' para a view.
+        } else {
+          $resultado_id = $resultado->id; // Caso sim é enviado o id do resultado para aquele usuário.
+        }
+        return view('quiz.perguntas', [
+          'questoes' => Questao::where('questionario_id', $id)->paginate(1),
+          'questionario' => Questionario::findOrFail($id),
+          'resultado' => $resultado_id,
+        ]);
+    }
+
+    /**
+     * Calcula a pontuação do usuário.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function resultado(Request $request)
+    {
+        $pontos = 0;
+
+        // Caso o resultado_id seja valor '0' deve-se criar um novo resultado.
+        // Caso não, então se atualiza o resultado já existente.
+
+        if($request->resultado_id == 0) {
+          $resultado = new Resultados;
+        } else {
+          $resultado = Resultados::findOrFail($request->resultado_id);
+        }
+
+        // Para acumular os pontos das questões passadas
+        $pontos += $resultado->pontos;
+
+        $pontos += $request->alternativa0 * 4;
+        $pontos += $request->alternativa1 * 3;
+        $pontos += $request->alternativa2 * 2;
+        $pontos += $request->alternativa3 * 1;
+
+        $resultado->pontos = $pontos;
+        $resultado->pessoa_id = Auth::user()->pessoa->id;
+        $resultado->questionario_id = $request->questionario_id;
+
+        $resultado->save();
+
+        return redirect($request->next_url);
+
     }
 
 }
