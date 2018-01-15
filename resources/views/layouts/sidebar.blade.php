@@ -42,7 +42,7 @@
     </li>
 
     <li class="bold">
-      <a href="{{ route('quiz.escolher') }}" class="waves-effect waves-green">
+      <a href="{{ route('vinculo.status') }}" class="waves-effect waves-green">
         <i class="far fa-edit fa-lg" style="margin: 0 15px;"></i> Quiz
       </a>
     </li>

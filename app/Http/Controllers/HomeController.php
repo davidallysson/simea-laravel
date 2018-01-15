@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use App\Models\Questao;
+use App\Models\Motivo;
 use App\Models\Resultados;
 use App\Models\Questionario;
 use Illuminate\Http\Request;
@@ -70,7 +71,7 @@ class HomeController extends Controller
             'questionarios' => Questionario::where('disponivel', 1)->get(),
             'resultados' => Resultados::where('pessoa_id', Auth::user()->pessoa->id)->get()
           ]);
-        } else if ($aluno->vinculo == 0){
+        } else if ($aluno->vinculo == 2){
           return view('quiz.questionarioInativo');
         }
     }
@@ -97,7 +98,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Calcula a pontuação do usuário.
+     * Calcula a pontuação do usuário para questionários ativos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -132,6 +133,30 @@ class HomeController extends Controller
 
         return redirect($request->next_url);
 
+    }
+
+    /**
+     * Salva os motivos do aluno inativo em evadir da instituição.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function resultadoInativo(Request $request)
+    {
+      $motivos = new Motivo;
+
+      foreach ($request->motivos as $motivo) {
+        $motivos->motivos .= $motivo . "<br>";
+      }
+      $motivos->motivos .= $request->outro . "<br>";
+      $motivos->resposta = "";
+
+      $motivos->pessoa_id = Auth::user()->pessoa->id;
+
+      $motivos->save();
+
+      return Redirect::route('home');
     }
 
 }

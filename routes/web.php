@@ -33,5 +33,6 @@ Route::post('/vinculo/verificar', 'HomeController@verificar')->name('vinculo.ver
 Route::get('/quiz/escolher', 'HomeController@escolher')->name('quiz.escolher');
 Route::get('/quiz/{id}/iniciar/', 'HomeController@iniciar')->name('quiz.iniciar');
 Route::post('/quiz/resultado', 'HomeController@resultado')->name('quiz.resultado');
+Route::post('/quiz/resultadoInativo', 'HomeController@resultadoInativo')->name('quiz.resultadoInativo');
 
 #
