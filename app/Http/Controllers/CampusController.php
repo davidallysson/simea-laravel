@@ -16,6 +16,15 @@ class CampusController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(function($request, $next) {
+          $this->usuario = auth()->user();
+
+          if($this->usuario->tipo_id == 2) {
+            return $next($request);
+          } else {
+            return redirect('board');
+          }
+        });
     }
 
     /**

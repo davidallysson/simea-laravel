@@ -23,6 +23,15 @@ class PessoaController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['create', 'store']]);
+        $this->middleware(function($request, $next) {
+          $this->usuario = auth()->user();
+
+          if($this->usuario->tipo_id == 2) {
+            return $next($request);
+          } else {
+            return redirect('board');
+          }
+        }, ['except' => ['perfil', 'edit', 'update']]);
     }
 
     /**
@@ -32,9 +41,6 @@ class PessoaController extends Controller
      */
     public function index()
     {
-        // if (Auth::user()->tipo_id == 1) {
-        //   return redirect("/");
-        // }
         return view('aluno.index', ['alunos' => Pessoa::all()]);
     }
 

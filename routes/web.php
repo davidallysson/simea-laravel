@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', function () { return view('home'); } )->name('home');
 
-Route::get('/home', 'HomeController@dashboard')->name('dashboard');
+Route::get('/board', 'HomeController@dashboard')->name('dashboard');
 Route::get('/perfil', 'PessoaController@perfil')->name('perfil');
 
 Route::resource('campus', 'CampusController');
