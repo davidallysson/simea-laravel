@@ -15,7 +15,7 @@ class ResultadosController extends Controller
      */
     public function index()
     {
-        //
+        return view('resultados.consultar');
     }
 
     /**

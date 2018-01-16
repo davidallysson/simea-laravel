@@ -117,13 +117,20 @@ class HomeController extends Controller
           $resultado = Resultados::findOrFail($request->resultado_id);
         }
 
+        $pontos += $request->alternativa0 * 1;
+        $pontos += $request->alternativa1 * 2;
+        $pontos += $request->alternativa2 * 3;
+        $pontos += $request->alternativa3 * 4;
+
+        $pontos -= 20;
+
         // Para acumular os pontos das questões passadas
         $pontos += $resultado->pontos;
 
-        $pontos += $request->alternativa0 * 4;
-        $pontos += $request->alternativa1 * 3;
-        $pontos += $request->alternativa2 * 2;
-        $pontos += $request->alternativa3 * 1;
+        // Fazer a média com os pontos já existentes, caso existam.
+        if ($resultado->pontos != 0) {
+          $pontos /= 2;
+        }
 
         $resultado->pontos = $pontos;
         $resultado->pessoa_id = Auth::user()->pessoa->id;

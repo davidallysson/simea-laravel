@@ -75,7 +75,7 @@
           </a>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#consultar">Consultar</a></li>
+              <li><a href="{{ route('consultar') }}">Consultar</a></li>
               <li><a href="#consultar">Comparar</a></li>
             </ul>
           </div>

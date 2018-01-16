@@ -34,7 +34,7 @@
             <select id="questionario_id" name="questionario_id">
               <option value="" disabled selected>Escolha um questionario</option>
               @foreach ($questionarios as $questionario)
-                <option value="{{ $questionario->id }}" {{ $questionario->id == $questao->$questionario_id ? 'selected' : '' }}>
+                <option value="{{ $questionario->id }}" {{ $questionario->id == $questao->questionario_id ? 'selected' : '' }}>
                   {{ $questionario->titulo }}
                 </option>
               @endforeach
