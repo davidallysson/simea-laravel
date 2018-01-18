@@ -31,7 +31,7 @@ class PessoaController extends Controller
           } else {
             return redirect('board');
           }
-        }, ['except' => ['perfil', 'edit', 'update']]);
+        }, ['except' => ['perfil', 'create', 'store', 'edit', 'update']]);
     }
 
     /**

@@ -6,82 +6,146 @@
 
 @section('content')
   <br>
-  <div id="evasometro" style="width: 50%; height: 200px; float: right;"></div>
-  <br>
-  <div id="graficoSexo" style="width: 50%; height: 400px;"></div>
-  <script type="text/javascript">
-    $(function () {
-      var graficoSexo = Highcharts.chart('graficoSexo', {
-          chart: { type: 'pie' },
-          title: { text: 'Porcentagem de Alunos por Sexo' },
-          tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: true,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                      style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                      }
-                  }
-              }
-          },
-          series: [{
-             name: 'Alunos',
-             colorByPoint: true,
-             data: [{ name: 'Feminino', y: 54 }, { name: 'Masculino', y: 46 }]
-         }]
+  <div class="row">
+    <form class="col s12" action="{{ route('consultarDados') }}" method="POST">
+      {{ csrf_field() }}
+      <p>
+        <span><b>Pesquisar por: </b></span>
+        <label>
+          <input name="tipoPesquisa" value="campus" type="radio" required /> <span>Campus</span>
+        </label>
+        <label>
+          <input name="tipoPesquisa" value="diretoria" type="radio" required /> <span>Diretoria</span>
+        </label>
+        <label>
+          <input name="tipoPesquisa" value="curso" type="radio" required /> <span>Curso</span>
+        </label>
+        <label>
+          <input name="tipoPesquisa" value="turma" type="radio" required /> <span>Turma</span>
+        </label>
+      </p>
+      <br>
+      <div class="row">
+        <div id="select_campus" class="input-field col s12 m10" style="display: none;">
+          <select id="campus_id" name="campus_id">
+            <option value="" disabled selected>Escolha um campus</option>
+            @foreach ($campuses as $campus)
+              <option value="{{ $campus->id }}" >{{ $campus->nome }}</option>
+            @endforeach
+          </select>
+          <label>Campus</label>
+        </div>
+      </div>
+      <div class="row">
+        <div id="select_diretoria" class="input-field col s12 m10" style="display: none;">
+          <select id="diretoria_id" name="diretoria_id">
+            <option value="" disabled selected>Escolha uma diretoria</option>
+            @foreach ($diretorias as $diretoria)
+              <option value="{{ $diretoria->id }}">{{ $diretoria->nome }}</option>
+            @endforeach
+          </select>
+          <label>Diretoria</label>
+        </div>
+      </div>
+      <div class="row">
+        <div id="select_curso" class="input-field col s12 m10" style="display: none;">
+          <select id="curso_id" name="curso_id">
+            <option value="" disabled selected>Escolha um curso</option>
+            @foreach ($cursos as $curso)
+              <option value="{{ $curso->id }}">{{ $curso->nome }}</option>
+            @endforeach
+          </select>
+          <label>Curso</label>
+        </div>
+      </div>
+      <div class="row">
+        <div id="select_turma" class="input-field col s12 m10" style="display: none;">
+          <select id="turma_id" name="turma_id">
+            <option value="" disabled selected>Escolha uma turma</option>
+            @foreach ($turmas as $turma)
+            <option value="{{ $turma->id }}">{{ $turma->nome }}</option>
+            @endforeach
+          </select>
+          <label>Turma</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <input class="btn btn-primary" type="submit" value="Consultar"/>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+      $('input:radio').change(function() {
+        if( $('input[value=campus]').is(':checked') ) {
+          $('#select_campus').show();
+          $('#select_diretoria').hide();
+          $('#select_curso').hide();
+          $('#select_turma').hide();
+          $('#campus_id').prop('required', true);
+          $('#diretoria_id').prop('required', false);
+          $('#curso_id').prop('required', false);
+          $('#turma_id').prop('required', false);
+        } else if ( $('input[value=diretoria]').is(':checked') ) {
+          $('#select_campus').hide();
+          $('#select_diretoria').show();
+          $('#select_curso').hide();
+          $('#select_turma').hide();
+          $('#campus_id').prop('required', false);
+          $('#diretoria_id').prop('required', true);
+          $('#curso_id').prop('required', false);
+          $('#turma_id').prop('required', false);
+        } else if ( $('input[value=curso]').is(':checked') ) {
+          $('#select_campus').hide();
+          $('#select_diretoria').hide();
+          $('#select_curso').show();
+          $('#select_turma').hide();
+          $('#campus_id').prop('required', false);
+          $('#diretoria_id').prop('required', false);
+          $('#curso_id').prop('required', true);
+          $('#turma_id').prop('required', false);
+        } else if ( $('input[value=turma]').is(':checked') ) {
+          $('#select_campus').hide();
+          $('#select_diretoria').hide();
+          $('#select_curso').hide();
+          $('#select_turma').show();
+          $('#campus_id').prop('required', false);
+          $('#diretoria_id').prop('required', false);
+          $('#curso_id').prop('required', false);
+          $('#turma_id').prop('required', true);
+        }
       });
-      var graficoEvasometro = Highcharts.chart('evasometro', {
-          chart: { type: 'solidgauge' },
-          title: "Evasometro",
-          pane: {
-              center: ['50%', '85%'],
-              size: '140%',
-              startAngle: -90,
-              endAngle: 90,
-              background: {
-                  backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                  innerRadius: '60%',
-                  outerRadius: '100%',
-                  shape: 'arc'
-              }
-          },
-          tooltip: { enabled: false },
-          yAxis: {
-              min: 0,
-              max: 10,
-              title: {
-                  text: 'Evasometro'
-              },
-              stops: [
-                  [0.1, '#55BF3B'], // green
-                  [0.5, '#DDDF0D'], // yellow
-                  [0.9, '#DF5353'] // red
-              ],
-              lineWidth: 0,
-              minorTickInterval: null,
-              tickAmount: 2,
-              title: { y: -70 },
-              labels: { y: 16 }
-          },
-          plotOptions: {
-              solidgauge: {
-                  dataLabels: { y: 5, borderWidth: 0, useHTML: true }
-              }
-          },
-          series: [{
-              name: 'Evasometro',
-              data: [8],
-              dataLabels: {
-                  format: '<div style="text-align:center"> <span style="font-size:25px;color:' +
-                      ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                         '<span style=" font-size:12px; color:silver">Evasometro</span></div>'
-              },
-          }]
-      });
-    });
   </script>
+
+  <br>
+  <div class="row">
+    <div class="col s12">
+      <div id="evasometro" style="height: 200px;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div id="graficoRenda" style="height: 400px;"></div>
+    </div>
+    <div class="col s12 m6">
+      <div id="graficoEstadoCivil" style="height: 400px;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div id="graficoSexo" style="height: 400px;"></div>
+    </div>
+    <div class="col s12 m6">
+      <div id="graficoEtnia" style="height: 400px;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div id="graficoIdade" style="height: 400px;"></div>
+    </div>
+  </div>
+  <br>
+  <script type="text/javascript" src="{{ asset('js/graficos.js') }}"></script>
 @endsection

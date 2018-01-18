@@ -70,16 +70,11 @@
         </li>
 
         <li class="bold">
-          <a class="collapsible-header waves-effect waves-green">
-            <i class="far fa-chart-bar fa-lg" style="margin: 0 15px;"></i> Resultados
+          <a href="{{ route('consultar') }}" class="waves-effect waves-green">
+            <i class="fas fa-chart-bar fa-lg" style="margin: 0 15px;"></i> Resultados
           </a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="{{ route('consultar') }}">Consultar</a></li>
-              <li><a href="#consultar">Comparar</a></li>
-            </ul>
-          </div>
         </li>
+
       </ul>
     </li>
   @endif
