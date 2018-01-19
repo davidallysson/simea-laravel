@@ -76,7 +76,7 @@
               <option value="Branco" {{ $aluno->raca == "Branco" ? 'selected' : '' }}>Branco</option>
               <option value="Preto" {{ $aluno->raca == "Preto" ? 'selected' : '' }}>Preto</option>
               <option value="Pardo" {{ $aluno->raca == "Pardo" ? 'selected' : '' }}>Pardo</option>
-              <option value="Indígena" {{ $aluno->raca == "Indígena" ? 'selected' : '' }}>Indígena</option>
+              <option value="Indígena" {{ $aluno->raca == "Indigena" ? 'selected' : '' }}>Indígena</option>
               <option value="Quilombola" {{ $aluno->raca == "Quilombola" ? 'selected' : '' }}>Quilombola</option>
             </select>
             <label>Raça</label>

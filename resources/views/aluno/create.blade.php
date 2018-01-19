@@ -75,7 +75,7 @@
               <option value="Branco">Branco</option>
               <option value="Preto">Preto</option>
               <option value="Pardo">Pardo</option>
-              <option value="Indígena">Indígena</option>
+              <option value="Indigena">Indígena</option>
               <option value="Quilombola">Quilombola</option>
             </select>
             <label>Raça</label>

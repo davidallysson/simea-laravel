@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-  Consultar
+  Resultado
 @endsection
 
 @section('content')
@@ -205,7 +205,7 @@
            name: 'Alunos',
            innerSize: '50%',
            colorByPoint: true,
-           data: [{ name: 'Feminino', y: 54 }, { name: 'Masculino', y: 46 }]
+           data: [{ name: 'Feminino', y: <?=$porcentagemMulheres?> }, { name: 'Masculino', y: <?=$porcentagemHomens?> }]
        }]
     });
 
@@ -233,7 +233,7 @@
            name: 'Alunos',
            innerSize: '50%',
            colorByPoint: true,
-           data: [{ name: 'Branco', y: 44 }, { name: 'Pardo', y: 35 }, { name: 'Preto', y: 19 }, { name: 'Indigena', y: 1 }, { name: 'Quilombola', y: 1 }]
+           data: [{ name: 'Branco', y: <?=$porcentagemBrancos?> }, { name: 'Pardo', y: <?=$porcentagemPardo?> }, { name: 'Preto', y: <?=$porcentagemPreto?> }, { name: 'Indigena', y: <?=$porcentagemIndigena?> }, { name: 'Quilombola', y: <?=$porcentagemQuilombola?> }]
        }]
     });
 
@@ -258,7 +258,7 @@
         series: [{
            name: 'Alunos',
            colorByPoint: true,
-           data: [{ name: 'Quatro salários ou mais', y: 10 }, { name: 'Três salários', y: 16 }, { name: 'Dois salários', y: 25 }, { name: 'Um salário', y: 49 }]
+           data: [{ name: 'Quatro salários ou mais', y: <?=$porcentagemQuatroSalarios?> }, { name: 'Três salários', y: <?=$porcentagemTresSalarios?> }, { name: 'Dois salários', y: <?=$porcentagemDoisSalarios?> }, { name: 'Um salário', y: <?=$porcentagemUmSalario?> }]
        }]
     });
 
