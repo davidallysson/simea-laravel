@@ -177,7 +177,9 @@
         series: [{
            name: 'Alunos',
            colorByPoint: true,
-           data: [ { name: '15 a 19 anos', y: 43 }, { name: '20 a 24 anos', y: 29 }, { name: '25 a 29 anos', y: 18 }, { name: '30 a 34 anos', y: 6 }, { name: '35 a 39 anos', y: 3 }, { name: '40 anos ou mais', y: 1 }]
+           data: [ { name: '15 a 19 anos', y: <?=$intervalo1519?> }, { name: '20 a 24 anos', y: <?=$intervalo2024?> },
+             { name: '25 a 29 anos', y: <?=$intervalo2529?> }, { name: '30 a 34 anos', y: <?=$intervalo3034?> },
+             { name: '35 a 39 anos', y: <?=$intervalo3539?> }, { name: '40 anos ou mais', y: <?=$intervalo40?> }]
        }]
     });
 
@@ -283,9 +285,10 @@
         series: [{
            name: 'Alunos',
            colorByPoint: true,
-           data: [ { name: 'Viúvo', y: 1 }, { name: 'Divorciado', y: 6 }, { name: 'Casado', y: 11 }, { name: 'Solteiro', y: 82 }]
+           data: [ { name: 'Viúvo', y: <?=$porcentagemViuvos?> }, { name: 'Divorciado', y: <?=$porcentagemDivorciados?> }, { name: 'Casado', y: <?=$porcentagemCasados?> }, { name: 'Solteiro', y: <?=$porcentagemSolteiros?> }]
        }]
     });
+
     var graficoEvasometro = Highcharts.chart('evasometro', {
         chart: { type: 'solidgauge' },
         title: { text: '' },

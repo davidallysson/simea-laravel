@@ -87,7 +87,7 @@
               <option value="Solteiro">Solteiro</option>
               <option value="Casado">Casado</option>
               <option value="Divorciado">Divorciado</option>
-              <option value="Viúvo">Viúvo</option>
+              <option value="Viuvo">Viúvo</option>
             </select>
             <label>Estado Civil</label>
           </div>

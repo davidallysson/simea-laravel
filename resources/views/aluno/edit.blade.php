@@ -88,7 +88,7 @@
               <option value="Solteiro" {{ $aluno->estadoCivil == "Solteiro" ? 'selected' : '' }}>Solteiro</option>
               <option value="Casado" {{ $aluno->estadoCivil == "Casado" ? 'selected' : '' }}>Casado</option>
               <option value="Divorciado" {{ $aluno->estadoCivil == "Divorciado" ? 'selected' : '' }}>Divorciado</option>
-              <option value="Viúvo" {{ $aluno->estadoCivil == "Viúvo" ? 'selected' : '' }}>Viúvo</option>
+              <option value="Viúvo" {{ $aluno->estadoCivil == "Viuvo" ? 'selected' : '' }}>Viúvo</option>
             </select>
             <label>Estado Civil</label>
           </div>
