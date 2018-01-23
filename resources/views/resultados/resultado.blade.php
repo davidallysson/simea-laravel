@@ -147,6 +147,7 @@
     </div>
   </div>
   <br>
+
   <script type="text/javascript">
   $(function () {
     // Verificar tamanho da tela para habilitar (ou não) as labels

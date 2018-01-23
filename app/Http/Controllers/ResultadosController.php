@@ -282,56 +282,66 @@ class ResultadosController extends Controller
           }
         }
 
-        $evasometro = $pontuacao / $quantidadeQuestionarios;
-        $porcentagemHomens = $homens * 100 / $quantidadeAlunos;
-        $porcentagemMulheres = $mulheres * 100 / $quantidadeAlunos;
-        $porcentagemBrancos = $branco * 100 / $quantidadeAlunos;
-        $porcentagemPreto = $preto * 100 / $quantidadeAlunos;
-        $porcentagemPardo = $pardo * 100 / $quantidadeAlunos;
-        $porcentagemIndigena = $indigena * 100 / $quantidadeAlunos;
-        $porcentagemQuilombola = $quilombola * 100 / $quantidadeAlunos;
-        $porcentagemUmSalario = $umSalario * 100 / $quantidadeAlunos;
-        $porcentagemDoisSalarios = $doisSalarios * 100 / $quantidadeAlunos;
-        $porcentagemTresSalarios = $tresSalarios * 100 / $quantidadeAlunos;
-        $porcentagemQuatroSalarios = $quatroSalarios * 100 / $quantidadeAlunos;
-        $porcentagemSolteiros = $solteiros * 100 / $quantidadeAlunos;
-        $porcentagemCasados = $casados * 100 / $quantidadeAlunos;
-        $porcentagemDivorciados = $divorciados * 100 / $quantidadeAlunos;
-        $porcentagemViuvos = $viuvos * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo1 = $intervalo1519 * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo2 = $intervalo2024 * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo3 = $intervalo2529 * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo4 = $intervalo3034 * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo5 = $intervalo3539 * 100 / $quantidadeAlunos;
-        $porcentagemIntervalo6 = $intervalo40 * 100 / $quantidadeAlunos;
-        return view('resultados.resultado', [
-          'campuses' => Campus::all(),
-          'diretorias' => Diretoria::all(),
-          'cursos' => Curso::all(),
-          'turmas' => Turma::all(),
-          'evasometro' => $evasometro,
-          'porcentagemHomens' => $porcentagemHomens,
-          'porcentagemMulheres' => $porcentagemMulheres,
-          'porcentagemBrancos' => $porcentagemBrancos,
-          'porcentagemPreto' => $porcentagemPreto,
-          'porcentagemPardo' => $porcentagemPardo,
-          'porcentagemIndigena' => $porcentagemIndigena,
-          'porcentagemQuilombola' => $porcentagemQuilombola,
-          'porcentagemUmSalario' => $porcentagemUmSalario,
-          'porcentagemDoisSalarios' => $porcentagemDoisSalarios,
-          'porcentagemTresSalarios' => $porcentagemTresSalarios,
-          'porcentagemQuatroSalarios' => $porcentagemQuatroSalarios,
-          'porcentagemSolteiros' => $porcentagemSolteiros,
-          'porcentagemCasados' => $porcentagemCasados,
-          'porcentagemDivorciados' => $porcentagemDivorciados,
-          'porcentagemViuvos' => $porcentagemViuvos,
-          'intervalo1519' => $porcentagemIntervalo1,
-          'intervalo2024' => $porcentagemIntervalo2,
-          'intervalo2529' => $porcentagemIntervalo3,
-          'intervalo3034' => $porcentagemIntervalo4,
-          'intervalo3539' => $porcentagemIntervalo5,
-          'intervalo40' => $porcentagemIntervalo6,
-        ]);
+        if ($quantidadeAlunos == 0) {
+          return view('resultados.consultar', [
+            'campuses' => Campus::all(),
+            'diretorias' => Diretoria::all(),
+            'cursos' => Curso::all(),
+            'turmas' => Turma::all(),
+            'msgErro' => "Não foram encontrados alunos nesta pesquisa.",
+          ]);
+        } else {
+          $evasometro = $pontuacao / $quantidadeQuestionarios;
+          $porcentagemHomens = $homens * 100 / $quantidadeAlunos;
+          $porcentagemMulheres = $mulheres * 100 / $quantidadeAlunos;
+          $porcentagemBrancos = $branco * 100 / $quantidadeAlunos;
+          $porcentagemPreto = $preto * 100 / $quantidadeAlunos;
+          $porcentagemPardo = $pardo * 100 / $quantidadeAlunos;
+          $porcentagemIndigena = $indigena * 100 / $quantidadeAlunos;
+          $porcentagemQuilombola = $quilombola * 100 / $quantidadeAlunos;
+          $porcentagemUmSalario = $umSalario * 100 / $quantidadeAlunos;
+          $porcentagemDoisSalarios = $doisSalarios * 100 / $quantidadeAlunos;
+          $porcentagemTresSalarios = $tresSalarios * 100 / $quantidadeAlunos;
+          $porcentagemQuatroSalarios = $quatroSalarios * 100 / $quantidadeAlunos;
+          $porcentagemSolteiros = $solteiros * 100 / $quantidadeAlunos;
+          $porcentagemCasados = $casados * 100 / $quantidadeAlunos;
+          $porcentagemDivorciados = $divorciados * 100 / $quantidadeAlunos;
+          $porcentagemViuvos = $viuvos * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo1 = $intervalo1519 * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo2 = $intervalo2024 * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo3 = $intervalo2529 * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo4 = $intervalo3034 * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo5 = $intervalo3539 * 100 / $quantidadeAlunos;
+          $porcentagemIntervalo6 = $intervalo40 * 100 / $quantidadeAlunos;
+          return view('resultados.resultado', [
+            'campuses' => Campus::all(),
+            'diretorias' => Diretoria::all(),
+            'cursos' => Curso::all(),
+            'turmas' => Turma::all(),
+            'evasometro' => $evasometro,
+            'porcentagemHomens' => $porcentagemHomens,
+            'porcentagemMulheres' => $porcentagemMulheres,
+            'porcentagemBrancos' => $porcentagemBrancos,
+            'porcentagemPreto' => $porcentagemPreto,
+            'porcentagemPardo' => $porcentagemPardo,
+            'porcentagemIndigena' => $porcentagemIndigena,
+            'porcentagemQuilombola' => $porcentagemQuilombola,
+            'porcentagemUmSalario' => $porcentagemUmSalario,
+            'porcentagemDoisSalarios' => $porcentagemDoisSalarios,
+            'porcentagemTresSalarios' => $porcentagemTresSalarios,
+            'porcentagemQuatroSalarios' => $porcentagemQuatroSalarios,
+            'porcentagemSolteiros' => $porcentagemSolteiros,
+            'porcentagemCasados' => $porcentagemCasados,
+            'porcentagemDivorciados' => $porcentagemDivorciados,
+            'porcentagemViuvos' => $porcentagemViuvos,
+            'intervalo1519' => $porcentagemIntervalo1,
+            'intervalo2024' => $porcentagemIntervalo2,
+            'intervalo2529' => $porcentagemIntervalo3,
+            'intervalo3034' => $porcentagemIntervalo4,
+            'intervalo3539' => $porcentagemIntervalo5,
+            'intervalo40' => $porcentagemIntervalo6,
+          ]);
+        }
     }
 
     /**

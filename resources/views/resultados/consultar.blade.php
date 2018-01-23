@@ -25,8 +25,8 @@
         </label>
       </p>
       <br>
-      <div class="row">
-        <div id="select_campus" class="input-field col s12 m10" style="display: none;">
+      <div class="row" id="select_campus" style="display: none;">
+        <div class="input-field col s12 m10">
           <select id="campus_id" name="campus_id">
             <option value="" disabled selected>Escolha um campus</option>
             @foreach ($campuses as $campus)
@@ -36,8 +36,8 @@
           <label>Campus</label>
         </div>
       </div>
-      <div class="row">
-        <div id="select_diretoria" class="input-field col s12 m10" style="display: none;">
+      <div class="row" id="select_diretoria" style="display: none;">
+        <div class="input-field col s12 m10">
           <select id="diretoria_id" name="diretoria_id">
             <option value="" disabled selected>Escolha uma diretoria</option>
             @foreach ($diretorias as $diretoria)
@@ -47,8 +47,8 @@
           <label>Diretoria</label>
         </div>
       </div>
-      <div class="row">
-        <div id="select_curso" class="input-field col s12 m10" style="display: none;">
+      <div class="row" id="select_curso" style="display: none;">
+        <div class="input-field col s12 m10">
           <select id="curso_id" name="curso_id">
             <option value="" disabled selected>Escolha um curso</option>
             @foreach ($cursos as $curso)
@@ -58,8 +58,8 @@
           <label>Curso</label>
         </div>
       </div>
-      <div class="row">
-        <div id="select_turma" class="input-field col s12 m10" style="display: none;">
+      <div class="row" id="select_turma" style="display: none;">
+        <div class="input-field col s12 m10">
           <select id="turma_id" name="turma_id">
             <option value="" disabled selected>Escolha uma turma</option>
             @foreach ($turmas as $turma)
@@ -119,33 +119,41 @@
       });
   </script>
 
-  <br>
-  <div class="row">
-    <div class="col s12">
-      <div id="evasometro" style="height: 200px;"></div>
+  @if( !empty($msgErro) )
+    <div class="row">
+      <div class="col s12">
+        <h4 class="header">{{ $msgErro }}</h4>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col s12 m6">
-      <div id="graficoRenda" style="height: 400px;"></div>
+  @else
+    <br>
+    <div class="row">
+      <div class="col s12">
+        <div id="evasometro" style="height: 200px;"></div>
+      </div>
     </div>
-    <div class="col s12 m6">
-      <div id="graficoEstadoCivil" style="height: 400px;"></div>
+    <div class="row">
+      <div class="col s12 m6">
+        <div id="graficoRenda" style="height: 400px;"></div>
+      </div>
+      <div class="col s12 m6">
+        <div id="graficoEstadoCivil" style="height: 400px;"></div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col s12 m6">
-      <div id="graficoSexo" style="height: 400px;"></div>
+    <div class="row">
+      <div class="col s12 m6">
+        <div id="graficoSexo" style="height: 400px;"></div>
+      </div>
+      <div class="col s12 m6">
+        <div id="graficoEtnia" style="height: 400px;"></div>
+      </div>
     </div>
-    <div class="col s12 m6">
-      <div id="graficoEtnia" style="height: 400px;"></div>
+    <div class="row">
+      <div class="col s12">
+        <div id="graficoIdade" style="height: 400px;"></div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-      <div id="graficoIdade" style="height: 400px;"></div>
-    </div>
-  </div>
-  <br>
+    <br>
+  @endif
   <script type="text/javascript" src="{{ asset('js/graficos.js') }}"></script>
 @endsection
