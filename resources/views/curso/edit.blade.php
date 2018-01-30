@@ -16,9 +16,7 @@
             <select id="diretoria_id" name="diretoria_id">
               <option value="" disabled>Escolha uma diretoria</option>
               @foreach ($diretorias as $diretoria)
-                <option value="{{ $diretoria->id }}" {{ $diretoria->id == $curso->diretoria_id ? 'selected' : '' }} >
-                  {{ $diretoria->nome }}
-                </option>
+                <option value="{{ $diretoria->id }}" {{ $diretoria->id == $curso->diretoria_id ? 'selected' : '' }} >{{ $diretoria->nome }}</option>
               @endforeach
             </select>
             <label>Diretoria</label>

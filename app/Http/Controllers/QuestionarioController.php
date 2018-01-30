@@ -64,7 +64,7 @@ class QuestionarioController extends Controller
         }
         $questionario->save();
 
-        return Redirect::route('questionario.index');
+        return Redirect::route('questionario.index')->with('status', 'Questionario cadastrado com sucesso!');
     }
 
     /**
@@ -107,7 +107,7 @@ class QuestionarioController extends Controller
         }
         $questionario->save();
 
-        return Redirect::route('questionario.index');
+        return Redirect::route('questionario.index')->with('status', 'Questionario atualizado com sucesso!');
     }
 
     /**
@@ -121,6 +121,6 @@ class QuestionarioController extends Controller
         $questionario = Questionario::findOrFail($id);
         $questionario->delete();
 
-        return Redirect::route('questionario.index');
+        return Redirect::route('questionario.index')->with('status', 'Questionário deletado com sucesso!');
     }
 }

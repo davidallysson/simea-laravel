@@ -96,7 +96,7 @@ class QuestaoController extends Controller
 
         $alternativa->save();
 
-        return Redirect::route('questao.index');
+        return Redirect::route('questao.index')->with('status', 'Questão cadastrada com sucesso!');
     }
 
     /**
@@ -181,7 +181,7 @@ class QuestaoController extends Controller
 
         $alternativa->save();
 
-        return Redirect::route('questao.index');
+        return Redirect::route('questao.index')->with('status', 'Questão atualizada com sucesso!');
     }
 
     /**
@@ -199,6 +199,6 @@ class QuestaoController extends Controller
         }
         $questao->delete();
 
-        return Redirect::route('questao.index');
+        return Redirect::route('questao.index')->with('status', 'Questão deletada com sucesso!');
     }
 }

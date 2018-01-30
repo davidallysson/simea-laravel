@@ -281,7 +281,7 @@ class ResultadosController extends Controller
             $quantidadeAlunos++;
           }
         }
-
+        // Caso não sejam encontrados alunos a partir da pesquisa para a geração de gráficos.
         if ($quantidadeAlunos == 0) {
           return view('resultados.consultar', [
             'campuses' => Campus::all(),
@@ -290,7 +290,8 @@ class ResultadosController extends Controller
             'turmas' => Turma::all(),
             'msgErro' => "Não foram encontrados alunos nesta pesquisa.",
           ]);
-        } else {
+        }
+        else {
           $evasometro = $pontuacao / $quantidadeQuestionarios;
           $porcentagemHomens = $homens * 100 / $quantidadeAlunos;
           $porcentagemMulheres = $mulheres * 100 / $quantidadeAlunos;

@@ -34,6 +34,7 @@ Route::get('/quiz/escolher', 'HomeController@escolher')->name('quiz.escolher');
 Route::get('/quiz/{id}/iniciar/', 'HomeController@iniciar')->name('quiz.iniciar');
 Route::post('/quiz/resultado', 'HomeController@resultado')->name('quiz.resultado');
 Route::post('/quiz/resultadoInativo', 'HomeController@resultadoInativo')->name('quiz.resultadoInativo');
+Route::get('/quiz/final', 'HomeController@finalDoQuestionario')->name('quiz.final');
 
 Route::get('/consultar', 'ResultadosController@index')->name('consultar');
 Route::post('/consultar', 'ResultadosController@consultarDados')->name('consultarDados');

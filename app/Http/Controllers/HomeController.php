@@ -71,7 +71,7 @@ class HomeController extends Controller
             'questionarios' => Questionario::where('disponivel', 1)->get(),
             'resultados' => Resultados::where('pessoa_id', Auth::user()->pessoa->id)->get()
           ]);
-        } else if ($aluno->vinculo == 2){
+        } else if ($aluno->vinculo == 2) {
           return view('quiz.questionarioInativo');
         }
     }
@@ -164,6 +164,11 @@ class HomeController extends Controller
       $motivos->save();
 
       return Redirect::route('home');
+    }
+
+    public function finalDoQuestionario()
+    {
+      return view('quiz.final');
     }
 
 }

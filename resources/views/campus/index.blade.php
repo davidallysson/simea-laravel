@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
   <div class="section">
 
     <div class="row">
@@ -53,4 +54,13 @@
     </div>
 
   </div>
+
+  @if(session('status'))
+    <script type="text/javascript">
+      $(document).ready(function(){
+        M.toast({html: ' <?= session('status') ?> '});
+      });
+    </script>
+  @endif
+  
 @endsection

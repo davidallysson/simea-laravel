@@ -59,4 +59,13 @@
     </div>
 
   </div>
+
+  @if(session('status'))
+    <script type="text/javascript">
+      $(document).ready(function(){
+        M.toast({html: ' <?= session('status') ?> '});
+      });
+    </script>
+  @endif
+  
 @endsection

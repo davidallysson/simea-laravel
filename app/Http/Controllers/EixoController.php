@@ -59,7 +59,7 @@ class EixoController extends Controller
         $eixo->nome = $request->nome;
         $eixo->save();
 
-        return Redirect::route('eixo.index');
+        return Redirect::route('eixo.index')->with('status', 'Eixo cadastrado com sucesso!');
     }
 
     /**
@@ -97,7 +97,7 @@ class EixoController extends Controller
         $eixo->nome = $request->nome;
         $eixo->save();
 
-        return Redirect::route('eixo.index');
+        return Redirect::route('eixo.index')->with('status', 'Eixo atualizado com sucesso!');
     }
 
     /**
@@ -111,6 +111,6 @@ class EixoController extends Controller
         $eixo = Eixo::findOrFail($id);
         $eixo->delete();
 
-        return Redirect::route('eixo.index');
+        return Redirect::route('eixo.index')->with('status', 'Eixo deletado com sucesso!');
     }
 }

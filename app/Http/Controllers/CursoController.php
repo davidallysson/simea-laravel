@@ -61,7 +61,7 @@ class CursoController extends Controller
         $curso->diretoria_id = $request->diretoria_id;
         $curso->save();
 
-        return Redirect::route('curso.index');
+        return Redirect::route('curso.index')->with('status', 'Curso cadastrado com sucesso!');
     }
 
     /**
@@ -103,7 +103,7 @@ class CursoController extends Controller
         $curso->diretoria_id = $request->diretoria_id;
         $curso->save();
 
-        return Redirect::route('curso.index');
+        return Redirect::route('curso.index')->with('status', 'Curso atualizado com sucesso!');
     }
 
     /**
@@ -117,6 +117,6 @@ class CursoController extends Controller
         $curso = Curso::findOrFail($id);
         $curso->delete();
 
-        return Redirect::route('curso.index');
+        return Redirect::route('curso.index')->with('status', 'Curso deletado com sucesso!');
     }
 }

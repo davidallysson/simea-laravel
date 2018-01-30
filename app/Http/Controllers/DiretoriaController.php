@@ -61,7 +61,7 @@ class DiretoriaController extends Controller
         $diretoria->campus_id = $request->campus_id;
         $diretoria->save();
 
-        return Redirect::route('diretoria.index');
+        return Redirect::route('diretoria.index')->with('status', 'Diretoria cadastrada com sucesso!');
     }
 
     /**
@@ -103,7 +103,7 @@ class DiretoriaController extends Controller
         $diretoria->campus_id = $request->campus_id;
         $diretoria->save();
 
-        return Redirect::route('diretoria.index');
+        return Redirect::route('diretoria.index')->with('status', 'Diretoria atualizada com sucesso!');
     }
 
     /**
@@ -117,6 +117,6 @@ class DiretoriaController extends Controller
       $diretoria = Diretoria::findOrFail($id);
       $diretoria->delete();
 
-      return Redirect::route('diretoria.index');
+      return Redirect::route('diretoria.index')->with('status', 'Diretoria deletada com sucesso!');
     }
 }

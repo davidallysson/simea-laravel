@@ -88,10 +88,10 @@ class PessoaController extends Controller
         $aluno->save();
 
         if (Auth::check()) {
-          return Redirect::route('aluno.index');
+          return Redirect::route('aluno.index')->with('status', 'Aluno cadastrado com sucesso!');
         } else {
           if (Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
-            return Redirect::route('home');
+            return Redirect::route('home')->with('status', 'Bem-vindo ao SIMEA!');
           }
         }
     }
@@ -157,7 +157,7 @@ class PessoaController extends Controller
 
         }
 
-        return Redirect::route('aluno.index');
+        return Redirect::route('aluno.index')->with('status', 'Aluno atualizado com sucesso!');
 
     }
 
@@ -174,7 +174,7 @@ class PessoaController extends Controller
         $aluno->delete();
         $user->delete();
 
-        return Redirect::route('aluno.index');
+        return Redirect::route('aluno.index')->with('status', 'Aluno deletado com sucesso!');
     }
 
     public function perfil()

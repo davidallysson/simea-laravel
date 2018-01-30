@@ -59,7 +59,7 @@ class CampusController extends Controller
         $campus->nome = $request->nome;
         $campus->save();
 
-        return Redirect::route('campus.index');
+        return Redirect::route('campus.index')->with('status', 'Campus cadastrado com sucesso!');
     }
 
     /**
@@ -96,7 +96,7 @@ class CampusController extends Controller
         $campus->nome = $request->nome;
         $campus->save();
 
-        return Redirect::route('campus.index');
+        return Redirect::route('campus.index')->with('status', 'Campus atualizado com sucesso!');
     }
 
     /**
@@ -109,6 +109,6 @@ class CampusController extends Controller
     {
         $campus->delete();
 
-        return Redirect::route('campus.index');
+        return Redirect::route('campus.index')->with('status', 'Campus deletado com sucesso!');
     }
 }

@@ -16,9 +16,7 @@
             <select id="curso_id" name="curso_id">
               <option value="" disabled>Escolha um curso</option>
               @foreach ($cursos as $curso)
-                <option value="{{ $curso->id }}" {{ $curso->id == $turma->curso_id ? 'selected' : '' }} >
-                  {{ $curso->nome }}
-                </option>
+                <option value="{{ $curso->id }}" {{ $curso->id == $turma->curso_id ? 'selected' : '' }} >{{ $curso->nome }}</option>
               @endforeach
             </select>
             <label>Curso</label>

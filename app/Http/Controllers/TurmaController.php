@@ -61,7 +61,7 @@ class TurmaController extends Controller
         $turma->curso_id = $request->curso_id;
         $turma->save();
 
-        return Redirect::route('turma.index');
+        return Redirect::route('turma.index')->with('status', 'Turma cadastrada com sucesso!');
     }
 
     /**
@@ -103,7 +103,7 @@ class TurmaController extends Controller
         $turma->curso_id = $request->curso_id;
         $turma->save();
 
-        return Redirect::route('turma.index');
+        return Redirect::route('turma.index')->with('status', 'Turma atualizada com sucesso!');
     }
 
     /**
@@ -117,6 +117,6 @@ class TurmaController extends Controller
         $turma = Turma::findOrFail($id);
         $turma->delete();
 
-        return Redirect::route('turma.index');
+        return Redirect::route('turma.index')->with('status', 'Turma deletada com sucesso!');
     }
 }

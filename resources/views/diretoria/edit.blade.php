@@ -16,9 +16,7 @@
             <select id="campus_id" name="campus_id">
               <option value="" disabled>Escolha um campus</option>
               @foreach ($campuses as $campus)
-                <option value="{{ $campus->id }}" {{ $campus->id == $diretoria->campus_id ? 'selected' : '' }} >
-                  {{ $campus->nome }}
-                </option>
+                <option value="{{ $campus->id }}" {{ $campus->id == $diretoria->campus_id ? 'selected' : '' }}>{{ $campus->nome }}</option>
               @endforeach
             </select>
             <label>Campus</label>

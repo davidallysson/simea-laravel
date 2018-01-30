@@ -43,7 +43,7 @@
           @if($questoes->hasMorePages())
             <input type="hidden" name="next_url" value="{{ $questoes->nextPageUrl() }}">
           @else
-            <input type="hidden" name="next_url" value="/quiz/escolher">
+            <input type="hidden" name="next_url" value="/quiz/final">
           @endif
           <input class="btn btn-primary" type="submit" value="Continuar"/>
         </form>
