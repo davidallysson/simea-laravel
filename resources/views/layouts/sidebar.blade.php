@@ -16,14 +16,14 @@
 
   <li class="bold">
     <a href="{{ route('home') }}" class="waves-effect waves-green">
-      <i class="fas fa-home fa-lg" style="margin: 0 15px;"></i> Home
+      <i class="fas fa-home fa-lg" style="margin: 0 15px;"></i> Página Inicial
     </a>
   </li>
 
   @guest
     <li class="bold">
       <a href="{{ route('login') }}" class="waves-effect waves-green">
-        <i class="fas fa-sign-in-alt fa-lg" style="margin: 0 15px;"></i> Entrar
+        <i class="fas fa-sign-in-alt fa-lg" style="margin: 0 15px;"></i> Entrar no Sistema
       </a>
     </li>
 
@@ -37,13 +37,13 @@
   @if(Auth::user()->tipo_id==1)
     <li class="bold">
       <a href="{{ route('perfil') }}" class="waves-effect waves-green">
-        <i class="fas fa-user fa-lg" style="margin: 0 15px;"></i> Perfil
+        <i class="fas fa-user fa-lg" style="margin: 0 15px;"></i> Meu Perfil
       </a>
     </li>
 
     <li class="bold">
       <a href="{{ route('vinculo.status') }}" class="waves-effect waves-green">
-        <i class="far fa-edit fa-lg" style="margin: 0 15px;"></i> Quiz
+        <i class="far fa-edit fa-lg" style="margin: 0 15px;"></i> Questionário
       </a>
     </li>
   @endif

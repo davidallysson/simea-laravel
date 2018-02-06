@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Database\Eloquent\Collection;
 
 class PessoaController extends Controller
@@ -149,7 +150,11 @@ class PessoaController extends Controller
           $aluno->estadoCivil = $request->estadoCivil;
           $aluno->raca = $request->raca;
           $aluno->renda = $request->renda;
-          $aluno->vinculo = $request->vinculo;
+          if ($request->vinculo == 'on') {
+            $aluno->vinculo = 1;
+          } else {
+            $aluno->vinculo = 0;
+          }
           $aluno->turma_id = $request->turma_id;
           $aluno->user_id = $user->id;
 
@@ -180,6 +185,15 @@ class PessoaController extends Controller
     public function perfil()
     {
         return view('aluno.perfil', ['aluno' => Pessoa::where('user_id', Auth::user()->id)->first()]);
+    }
+
+    /**
+     * Retorna um JSON com id e nome de todos os alunos pertencentes a turma.
+     */
+    public function alunos(int $id)
+    {
+      $alunos = Turma::findOrFail($id)->alunos->pluck('id', 'nome');
+      return Response::json($alunos);
     }
 
 }

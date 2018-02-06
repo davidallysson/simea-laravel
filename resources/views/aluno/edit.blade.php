@@ -96,7 +96,7 @@
           <div class="col s12 m6 l2 switch">
             <label>
               Inativo
-              <input type="checkbox" {{ $aluno->vinculo == 1 ? 'checked' : '' }}>
+              <input name="vinculo" type="checkbox" {{ $aluno->vinculo == 1 ? 'checked' : '' }}>
               <span class="lever"></span>
               Ativo
             </label>

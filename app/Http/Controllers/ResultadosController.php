@@ -21,12 +21,7 @@ class ResultadosController extends Controller
      */
     public function index()
     {
-        return view('resultados.consultar', [
-          'campuses' => Campus::all(),
-          'diretorias' => Diretoria::all(),
-          'cursos' => Curso::all(),
-          'turmas' => Turma::all(),
-        ]);
+        return view('resultados.consultar', ['campuses' => Campus::all()]);
     }
 
     public function consultarDados(Request $request)

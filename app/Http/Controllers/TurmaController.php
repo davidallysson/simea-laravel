@@ -6,6 +6,7 @@ use App\Models\Turma;
 use App\Models\Curso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class TurmaController extends Controller
 {
@@ -118,5 +119,14 @@ class TurmaController extends Controller
         $turma->delete();
 
         return Redirect::route('turma.index')->with('status', 'Turma deletada com sucesso!');
+    }
+
+    /**
+     * Retorna um JSON com id e nome de todas as turmas pertencentes ao curso.
+     */
+    public function turmas(int $id)
+    {
+      $turmas = Curso::findOrFail($id)->turmas->pluck('id', 'nome');
+      return Response::json($turmas);
     }
 }

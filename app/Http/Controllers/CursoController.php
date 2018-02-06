@@ -6,6 +6,7 @@ use App\Models\Curso;
 use App\Models\Diretoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class CursoController extends Controller
 {
@@ -118,5 +119,14 @@ class CursoController extends Controller
         $curso->delete();
 
         return Redirect::route('curso.index')->with('status', 'Curso deletado com sucesso!');
+    }
+
+    /**
+     * Retorna um JSON com id e nome de todas os cursos pertencentes a diretoria.
+     */
+    public function cursos(int $id)
+    {
+      $cursos = Diretoria::findOrFail($id)->cursos->pluck('id', 'nome');
+      return Response::json($cursos);
     }
 }

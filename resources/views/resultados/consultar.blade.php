@@ -9,26 +9,11 @@
   <div class="row">
     <form class="col s12" action="{{ route('consultarDados') }}" method="POST">
       {{ csrf_field() }}
-      <p>
-        <span><b>Pesquisar por: </b></span>
-        <label>
-          <input name="tipoPesquisa" value="campus" type="radio" required /> <span>Campus</span>
-        </label>
-        <label>
-          <input name="tipoPesquisa" value="diretoria" type="radio" required /> <span>Diretoria</span>
-        </label>
-        <label>
-          <input name="tipoPesquisa" value="curso" type="radio" required /> <span>Curso</span>
-        </label>
-        <label>
-          <input name="tipoPesquisa" value="turma" type="radio" required /> <span>Turma</span>
-        </label>
-      </p>
       <br>
-      <div class="row" id="select_campus" style="display: none;">
+      <div class="row" id="select_campus">
         <div class="input-field col s12 m10">
-          <select id="campus_id" name="campus_id">
-            <option value="" disabled selected>Escolha um campus</option>
+          <select id="campus_id" name="campus_id" required>
+            <option value="" disabled selected>Escolha uma opção</option>
             @foreach ($campuses as $campus)
               <option value="{{ $campus->id }}" >{{ $campus->nome }}</option>
             @endforeach
@@ -36,37 +21,36 @@
           <label>Campus</label>
         </div>
       </div>
-      <div class="row" id="select_diretoria" style="display: none;">
+      <div class="row" id="select_diretoria">
         <div class="input-field col s12 m10">
-          <select id="diretoria_id" name="diretoria_id">
-            <option value="" disabled selected>Escolha uma diretoria</option>
-            @foreach ($diretorias as $diretoria)
-              <option value="{{ $diretoria->id }}">{{ $diretoria->nome }}</option>
-            @endforeach
+          <select id="diretoria_id" name="diretoria_id" disabled>
+            <option value="" disabled selected>Escolha uma opção</option>
           </select>
           <label>Diretoria</label>
         </div>
       </div>
-      <div class="row" id="select_curso" style="display: none;">
+      <div class="row" id="select_curso">
         <div class="input-field col s12 m10">
-          <select id="curso_id" name="curso_id">
-            <option value="" disabled selected>Escolha um curso</option>
-            @foreach ($cursos as $curso)
-              <option value="{{ $curso->id }}">{{ $curso->nome }}</option>
-            @endforeach
+          <select id="curso_id" name="curso_id" disabled>
+            <option value="" disabled selected>Escolha uma opção</option>
           </select>
           <label>Curso</label>
         </div>
       </div>
-      <div class="row" id="select_turma" style="display: none;">
+      <div class="row" id="select_turma">
         <div class="input-field col s12 m10">
-          <select id="turma_id" name="turma_id">
-            <option value="" disabled selected>Escolha uma turma</option>
-            @foreach ($turmas as $turma)
-            <option value="{{ $turma->id }}">{{ $turma->nome }}</option>
-            @endforeach
+          <select id="turma_id" name="turma_id" disabled>
+            <option value="" disabled selected>Escolha uma opção</option>
           </select>
           <label>Turma</label>
+        </div>
+      </div>
+      <div class="row" id="select_aluno">
+        <div class="input-field col s12 m10">
+          <select id="aluno_id" name="aluno_id" disabled>
+            <option value="" disabled selected>Escolha uma opção</option>
+          </select>
+          <label>Aluno</label>
         </div>
       </div>
       <div class="row">
@@ -78,45 +62,90 @@
   </div>
 
   <script>
-      $('input:radio').change(function() {
-        if( $('input[value=campus]').is(':checked') ) {
-          $('#select_campus').show();
-          $('#select_diretoria').hide();
-          $('#select_curso').hide();
-          $('#select_turma').hide();
-          $('#campus_id').prop('required', true);
-          $('#diretoria_id').prop('required', false);
-          $('#curso_id').prop('required', false);
-          $('#turma_id').prop('required', false);
-        } else if ( $('input[value=diretoria]').is(':checked') ) {
-          $('#select_campus').hide();
-          $('#select_diretoria').show();
-          $('#select_curso').hide();
-          $('#select_turma').hide();
-          $('#campus_id').prop('required', false);
-          $('#diretoria_id').prop('required', true);
-          $('#curso_id').prop('required', false);
-          $('#turma_id').prop('required', false);
-        } else if ( $('input[value=curso]').is(':checked') ) {
-          $('#select_campus').hide();
-          $('#select_diretoria').hide();
-          $('#select_curso').show();
-          $('#select_turma').hide();
-          $('#campus_id').prop('required', false);
-          $('#diretoria_id').prop('required', false);
-          $('#curso_id').prop('required', true);
-          $('#turma_id').prop('required', false);
-        } else if ( $('input[value=turma]').is(':checked') ) {
-          $('#select_campus').hide();
-          $('#select_diretoria').hide();
-          $('#select_curso').hide();
-          $('#select_turma').show();
-          $('#campus_id').prop('required', false);
-          $('#diretoria_id').prop('required', false);
-          $('#curso_id').prop('required', false);
-          $('#turma_id').prop('required', true);
-        }
+
+      $('#select_campus').change(function () {
+        $('#diretoria_id').prop("disabled", false);
+        $("#diretoria_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+        $.get('/campus/diretorias/' + $('#campus_id').val(), function(diretorias) {
+          if (diretorias.length === 0) {
+            $('#diretoria_id').prop("disabled", true);
+            $("#diretoria_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+            $('select').select();
+          } else {
+            $.each(diretorias, function (key, value) {
+              $('#diretoria_id').append('<option value="' + value + '">' + key + '</option>');
+              $('select').select();
+            });
+          }
+          $('#curso_id').prop("disabled", true);
+          $("#curso_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('#turma_id').prop("disabled", true);
+          $("#turma_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('#aluno_id').prop("disabled", true);
+          $("#aluno_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('select').select();
+        });
       });
+
+      $('#select_diretoria').change(function () {
+        $('#curso_id').prop("disabled", false);
+        $("#curso_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+        $.get('/diretoria/cursos/' + $('#diretoria_id').val(), function(cursos) {
+          if (cursos.length === 0) {
+            $('#curso_id').prop("disabled", true);
+            $("#curso_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+            $('select').select();
+          } else {
+            $.each(cursos, function (key, value) {
+              $('#curso_id').append('<option value="' + value + '">' + key + '</option>');
+              $('select').select();
+            });
+          }
+          $('#turma_id').prop("disabled", true);
+          $("#turma_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('#aluno_id').prop("disabled", true);
+          $("#aluno_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('select').select();
+        });
+      });
+
+      $('#select_curso').change(function () {
+        $('#turma_id').prop("disabled", false);
+        $("#turma_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+        $.get('/curso/turmas/' + $('#curso_id').val(), function(turmas) {
+          if (turmas.length === 0) {
+            $('#turma_id').prop("disabled", true);
+            $("#turma_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+            $('select').select();
+          } else {
+            $.each(turmas, function (key, value) {
+              $('#turma_id').append('<option value="' + value + '">' + key + '</option>');
+              $('select').select();
+            });
+          }
+          $('#aluno_id').prop("disabled", true);
+          $("#aluno_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+          $('select').select();
+        });
+      });
+
+      $('#select_turma').change(function () {
+        $('#aluno_id').prop("disabled", false);
+        $("#aluno_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+        $.get('/turma/alunos/' + $('#turma_id').val(), function(alunos) {
+          if (alunos.length === 0) {
+            $('#aluno_id').prop("disabled", true);
+            $("#aluno_id").html('<option value="" disabled selected>Escolha uma opção</option>');
+            $('select').select();
+          } else {
+            $.each(alunos, function (key, value) {
+              $('#aluno_id').append('<option value="' + value + '">' + key + '</option>');
+              $('select').select();
+            });
+          }
+        });
+      });
+
   </script>
 
   @if( !empty($msgErro) )

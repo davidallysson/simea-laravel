@@ -6,6 +6,7 @@ use App\Models\Campus;
 use App\Models\Diretoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class DiretoriaController extends Controller
 {
@@ -119,4 +120,14 @@ class DiretoriaController extends Controller
 
       return Redirect::route('diretoria.index')->with('status', 'Diretoria deletada com sucesso!');
     }
+
+    /**
+     * Retorna um JSON com id e nome de todas as diretorias pertencentes ao campus.
+     */
+    public function diretorias(int $id)
+    {
+      $diretorias = Campus::findOrFail($id)->diretorias->pluck('id', 'nome');
+      return Response::json($diretorias);
+    }
+
 }
