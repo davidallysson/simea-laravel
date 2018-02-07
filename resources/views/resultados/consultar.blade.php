@@ -62,7 +62,6 @@
   </div>
 
   <script>
-
       $('#select_campus').change(function () {
         $('#diretoria_id').prop("disabled", false);
         $("#diretoria_id").html('<option value="" disabled selected>Escolha uma opção</option>');
@@ -145,7 +144,6 @@
           }
         });
       });
-
   </script>
 
   @if( !empty($msgErro) )

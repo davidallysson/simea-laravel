@@ -27,32 +27,217 @@ class ResultadosController extends Controller
     public function consultarDados(Request $request)
     {
         $pontuacao = 0;
-        $homens = 0;
-        $mulheres = 0;
-        $solteiros = 0;
-        $casados = 0;
-        $viuvos = 0;
-        $divorciados = 0;
-        $branco = 0;
-        $preto = 0;
-        $pardo = 0;
-        $indigena = 0;
-        $quilombola = 0;
-        $umSalario = 0;
-        $doisSalarios = 0;
-        $tresSalarios = 0;
-        $quatroSalarios = 0;
-        $quantidadeAlunos = 0;
-        $quantidadeQuestionarios = 0;
-        $intervalo1519 = 0;
-        $intervalo2024 = 0;
-        $intervalo2529 = 0;
-        $intervalo3034 = 0;
-        $intervalo3539 = 0;
-        $intervalo40 = 0;
+        $homens = 0; $mulheres = 0;
+        $quantidadeAlunos = 0; $quantidadeQuestionarios = 0;
+        $solteiros = 0; $casados = 0; $viuvos = 0; $divorciados = 0;
+        $branco = 0; $preto = 0; $pardo = 0; $indigena = 0; $quilombola = 0;
+        $umSalario = 0; $doisSalarios = 0; $tresSalarios = 0; $quatroSalarios = 0;
+        $intervalo1519 = 0; $intervalo2024 = 0; $intervalo2529 = 0; $intervalo3034 = 0; $intervalo3539 = 0; $intervalo40 = 0;
 
-        // Caso a pesquisa seja por campus
-        if ($request->tipoPesquisa == "campus") {
+        if ($request->aluno_id != "") {
+          $aluno = Pessoa::findOrFail($request->aluno_id);
+          foreach ($aluno->resultados as $resultado) {
+            $pontuacao += $resultado->pontos;
+            $quantidadeQuestionarios++;
+          }
+          switch ($aluno->raca) {
+            case 'Branco':     $branco++; break;
+            case 'Preto':      $preto++; break;
+            case 'Pardo':      $pardo++; break;
+            case 'Indigena':   $indigena++; break;
+            case 'Quilombola': $quilombola++; break;
+          }
+          switch ($aluno->renda) {
+            case 1: $umSalario++; break;
+            case 2: $doisSalarios++; break;
+            case 3: $tresSalarios++; break;
+            case 4: $quatroSalarios++; break;
+          }
+          switch ($aluno->sexo) {
+            case 'Masculino': $homens++; break;
+            case 'Feminino':  $mulheres++; break;
+          }
+          switch ($aluno->estadoCivil) {
+            case 'Solteiro': $solteiros++; break;
+            case 'Casado': $casados++; break;
+            case 'Divorciado': $divorciados++; break;
+            case 'Viuvo': $viuvos++; break;
+          }
+          $dataAtual = new DateTime();
+          $dataAluno = new DateTime($aluno->dataNascimento);
+          $intervalo = $dataAtual->diff( $dataAluno );
+
+          if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
+            $intervalo1519++;
+          } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
+            $intervalo2024++;
+          } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
+            $intervalo2529++;
+          } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
+            $intervalo3034++;
+          } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
+            $intervalo3539++;
+          } else if ( $intervalo->y >= 40 ) {
+            $intervalo40++;
+          }
+          $quantidadeAlunos++;
+        } else if ($request->turma_id != "") {
+          $alunos = Pessoa::where('turma_id', $request->turma_id)->get();
+          foreach ($alunos as $aluno) {
+            foreach ($aluno->resultados as $resultado) {
+              $pontuacao += $resultado->pontos;
+              $quantidadeQuestionarios++;
+            }
+            switch ($aluno->raca) {
+              case 'Branco':     $branco++; break;
+              case 'Preto':      $preto++; break;
+              case 'Pardo':      $pardo++; break;
+              case 'Indigena':   $indigena++; break;
+              case 'Quilombola': $quilombola++; break;
+            }
+            switch ($aluno->renda) {
+              case 1: $umSalario++; break;
+              case 2: $doisSalarios++; break;
+              case 3: $tresSalarios++; break;
+              case 4: $quatroSalarios++; break;
+            }
+            switch ($aluno->sexo) {
+              case 'Masculino': $homens++; break;
+              case 'Feminino':  $mulheres++; break;
+            }
+            switch ($aluno->estadoCivil) {
+              case 'Solteiro': $solteiros++; break;
+              case 'Casado': $casados++; break;
+              case 'Divorciado': $divorciados++; break;
+              case 'Viuvo': $viuvos++; break;
+            }
+            $dataAtual = new DateTime();
+            $dataAluno = new DateTime($aluno->dataNascimento);
+            $intervalo = $dataAtual->diff( $dataAluno );
+
+            if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
+              $intervalo1519++;
+            } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
+              $intervalo2024++;
+            } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
+              $intervalo2529++;
+            } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
+              $intervalo3034++;
+            } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
+              $intervalo3539++;
+            } else if ( $intervalo->y >= 40 ) {
+              $intervalo40++;
+            }
+            $quantidadeAlunos++;
+          }
+        } else if ($request->curso_id != "") {
+          $turmas = Turma::where('curso_id', $request->curso_id)->get();
+          foreach ($turmas as $turma) {
+            $alunos = Pessoa::where('turma_id', $turma->id)->get();
+            foreach ($alunos as $aluno) {
+              foreach ($aluno->resultados as $resultado) {
+                $pontuacao += $resultado->pontos;
+                $quantidadeQuestionarios++;
+              }
+              switch ($aluno->raca) {
+                case 'Branco':     $branco++; break;
+                case 'Preto':      $preto++; break;
+                case 'Pardo':      $pardo++; break;
+                case 'Indigena':   $indigena++; break;
+                case 'Quilombola': $quilombola++; break;
+              }
+              switch ($aluno->renda) {
+                case 1: $umSalario++; break;
+                case 2: $doisSalarios++; break;
+                case 3: $tresSalarios++; break;
+                case 4: $quatroSalarios++; break;
+              }
+              switch ($aluno->sexo) {
+                case 'Masculino': $homens++; break;
+                case 'Feminino':  $mulheres++; break;
+              }
+              switch ($aluno->estadoCivil) {
+                case 'Solteiro': $solteiros++; break;
+                case 'Casado': $casados++; break;
+                case 'Divorciado': $divorciados++; break;
+                case 'Viuvo': $viuvos++; break;
+              }
+              $dataAtual = new DateTime();
+              $dataAluno = new DateTime($aluno->dataNascimento);
+              $intervalo = $dataAtual->diff( $dataAluno );
+
+              if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
+                $intervalo1519++;
+              } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
+                $intervalo2024++;
+              } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
+                $intervalo2529++;
+              } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
+                $intervalo3034++;
+              } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
+                $intervalo3539++;
+              } else if ( $intervalo->y >= 40 ) {
+                $intervalo40++;
+              }
+              $quantidadeAlunos++;
+            }
+          }
+        } else if ($request->diretoria_id != "") {
+          $cursos = Curso::where('diretoria_id', $request->diretoria_id)->get();
+          foreach ($cursos as $curso) {
+            $turmas = Turma::where('curso_id', $curso->id)->get();
+            foreach ($turmas as $turma) {
+              $alunos = Pessoa::where('turma_id', $turma->id)->get();
+              foreach ($alunos as $aluno) {
+                foreach ($aluno->resultados as $resultado) {
+                  $pontuacao += $resultado->pontos;
+                  $quantidadeQuestionarios++;
+                }
+                switch ($aluno->raca) {
+                  case 'Branco':     $branco++; break;
+                  case 'Preto':      $preto++; break;
+                  case 'Pardo':      $pardo++; break;
+                  case 'Indigena':   $indigena++; break;
+                  case 'Quilombola': $quilombola++; break;
+                }
+                switch ($aluno->renda) {
+                  case 1: $umSalario++; break;
+                  case 2: $doisSalarios++; break;
+                  case 3: $tresSalarios++; break;
+                  case 4: $quatroSalarios++; break;
+                }
+                switch ($aluno->sexo) {
+                  case 'Masculino': $homens++; break;
+                  case 'Feminino':  $mulheres++; break;
+                }
+                switch ($aluno->estadoCivil) {
+                  case 'Solteiro': $solteiros++; break;
+                  case 'Casado': $casados++; break;
+                  case 'Divorciado': $divorciados++; break;
+                  case 'Viuvo': $viuvos++; break;
+                }
+                $dataAtual = new DateTime();
+                $dataAluno = new DateTime($aluno->dataNascimento);
+                $intervalo = $dataAtual->diff( $dataAluno );
+
+                if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
+                  $intervalo1519++;
+                } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
+                  $intervalo2024++;
+                } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
+                  $intervalo2529++;
+                } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
+                  $intervalo3034++;
+                } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
+                  $intervalo3539++;
+                } else if ( $intervalo->y >= 40 ) {
+                  $intervalo40++;
+                }
+                $quantidadeAlunos++;
+              }
+            }
+          }
+        } else if ($request->campus_id != "") {
           $diretorias = Diretoria::where('campus_id', $request->campus_id)->get();
           foreach ($diretorias as $diretoria) {
             $cursos = Curso::where('diretoria_id', $diretoria->id)->get();
@@ -112,179 +297,9 @@ class ResultadosController extends Controller
           }
         }
 
-        // Caso a pesquisa seja por diretoria
-        if ($request->tipoPesquisa == "diretoria") {
-          $cursos = Curso::where('diretoria_id', $request->diretoria_id)->get();
-          foreach ($cursos as $curso) {
-            $turmas = Turma::where('curso_id', $curso->id)->get();
-            foreach ($turmas as $turma) {
-              $alunos = Pessoa::where('turma_id', $turma->id)->get();
-              foreach ($alunos as $aluno) {
-                foreach ($aluno->resultados as $resultado) {
-                  $pontuacao += $resultado->pontos;
-                  $quantidadeQuestionarios++;
-                }
-                switch ($aluno->raca) {
-                  case 'Branco':     $branco++; break;
-                  case 'Preto':      $preto++; break;
-                  case 'Pardo':      $pardo++; break;
-                  case 'Indigena':   $indigena++; break;
-                  case 'Quilombola': $quilombola++; break;
-                }
-                switch ($aluno->renda) {
-                  case 1: $umSalario++; break;
-                  case 2: $doisSalarios++; break;
-                  case 3: $tresSalarios++; break;
-                  case 4: $quatroSalarios++; break;
-                }
-                switch ($aluno->sexo) {
-                  case 'Masculino': $homens++; break;
-                  case 'Feminino':  $mulheres++; break;
-                }
-                switch ($aluno->estadoCivil) {
-                  case 'Solteiro': $solteiros++; break;
-                  case 'Casado': $casados++; break;
-                  case 'Divorciado': $divorciados++; break;
-                  case 'Viuvo': $viuvos++; break;
-                }
-                $dataAtual = new DateTime();
-                $dataAluno = new DateTime($aluno->dataNascimento);
-                $intervalo = $dataAtual->diff( $dataAluno );
-
-                if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
-                  $intervalo1519++;
-                } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
-                  $intervalo2024++;
-                } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
-                  $intervalo2529++;
-                } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
-                  $intervalo3034++;
-                } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
-                  $intervalo3539++;
-                } else if ( $intervalo->y >= 40 ) {
-                  $intervalo40++;
-                }
-                $quantidadeAlunos++;
-              }
-            }
-          }
-        }
-
-        // Caso a pesquisa seja por curso
-        if ($request->tipoPesquisa == "curso") {
-          $turmas = Turma::where('curso_id', $request->curso_id)->get();
-          foreach ($turmas as $turma) {
-            $alunos = Pessoa::where('turma_id', $turma->id)->get();
-            foreach ($alunos as $aluno) {
-              foreach ($aluno->resultados as $resultado) {
-                $pontuacao += $resultado->pontos;
-                $quantidadeQuestionarios++;
-              }
-              switch ($aluno->raca) {
-                case 'Branco':     $branco++; break;
-                case 'Preto':      $preto++; break;
-                case 'Pardo':      $pardo++; break;
-                case 'Indigena':   $indigena++; break;
-                case 'Quilombola': $quilombola++; break;
-              }
-              switch ($aluno->renda) {
-                case 1: $umSalario++; break;
-                case 2: $doisSalarios++; break;
-                case 3: $tresSalarios++; break;
-                case 4: $quatroSalarios++; break;
-              }
-              switch ($aluno->sexo) {
-                case 'Masculino': $homens++; break;
-                case 'Feminino':  $mulheres++; break;
-              }
-              switch ($aluno->estadoCivil) {
-                case 'Solteiro': $solteiros++; break;
-                case 'Casado': $casados++; break;
-                case 'Divorciado': $divorciados++; break;
-                case 'Viuvo': $viuvos++; break;
-              }
-              $dataAtual = new DateTime();
-              $dataAluno = new DateTime($aluno->dataNascimento);
-              $intervalo = $dataAtual->diff( $dataAluno );
-
-              if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
-                $intervalo1519++;
-              } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
-                $intervalo2024++;
-              } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
-                $intervalo2529++;
-              } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
-                $intervalo3034++;
-              } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
-                $intervalo3539++;
-              } else if ( $intervalo->y >= 40 ) {
-                $intervalo40++;
-              }
-              $quantidadeAlunos++;
-            }
-          }
-        }
-
-        // Caso a pesquisa seja por turma
-        if ($request->tipoPesquisa == "turma") {
-          $alunos = Pessoa::where('turma_id', $request->turma_id)->get();
-          foreach ($alunos as $aluno) {
-            foreach ($aluno->resultados as $resultado) {
-              $pontuacao += $resultado->pontos;
-              $quantidadeQuestionarios++;
-            }
-            switch ($aluno->raca) {
-              case 'Branco':     $branco++; break;
-              case 'Preto':      $preto++; break;
-              case 'Pardo':      $pardo++; break;
-              case 'Indigena':   $indigena++; break;
-              case 'Quilombola': $quilombola++; break;
-            }
-            switch ($aluno->renda) {
-              case 1: $umSalario++; break;
-              case 2: $doisSalarios++; break;
-              case 3: $tresSalarios++; break;
-              case 4: $quatroSalarios++; break;
-            }
-            switch ($aluno->sexo) {
-              case 'Masculino': $homens++; break;
-              case 'Feminino':  $mulheres++; break;
-            }
-            switch ($aluno->estadoCivil) {
-              case 'Solteiro': $solteiros++; break;
-              case 'Casado': $casados++; break;
-              case 'Divorciado': $divorciados++; break;
-              case 'Viuvo': $viuvos++; break;
-            }
-            $dataAtual = new DateTime();
-            $dataAluno = new DateTime($aluno->dataNascimento);
-            $intervalo = $dataAtual->diff( $dataAluno );
-
-            if ( $intervalo->y >= 15 && $intervalo->y <= 19 ) {
-              $intervalo1519++;
-            } else if ( $intervalo->y >= 20 && $intervalo->y <= 24 ) {
-              $intervalo2024++;
-            } else if ( $intervalo->y >= 25 && $intervalo->y <= 29 ) {
-              $intervalo2529++;
-            } else if ( $intervalo->y >= 30 && $intervalo->y <= 34 ) {
-              $intervalo3034++;
-            } else if ( $intervalo->y >= 35 && $intervalo->y <= 39 ) {
-              $intervalo3539++;
-            } else if ( $intervalo->y >= 40 ) {
-              $intervalo40++;
-            }
-            $quantidadeAlunos++;
-          }
-        }
         // Caso não sejam encontrados alunos a partir da pesquisa para a geração de gráficos.
         if ($quantidadeAlunos == 0) {
-          return view('resultados.consultar', [
-            'campuses' => Campus::all(),
-            'diretorias' => Diretoria::all(),
-            'cursos' => Curso::all(),
-            'turmas' => Turma::all(),
-            'msgErro' => "Não foram encontrados alunos nesta pesquisa.",
-          ]);
+          return view('resultados.consultar', ['campuses' => Campus::all(), 'msgErro' => "Não foram encontrados alunos nesta pesquisa."]);
         }
         else {
           $evasometro = $pontuacao / $quantidadeQuestionarios;
@@ -311,9 +326,6 @@ class ResultadosController extends Controller
           $porcentagemIntervalo6 = $intervalo40 * 100 / $quantidadeAlunos;
           return view('resultados.resultado', [
             'campuses' => Campus::all(),
-            'diretorias' => Diretoria::all(),
-            'cursos' => Curso::all(),
-            'turmas' => Turma::all(),
             'evasometro' => $evasometro,
             'porcentagemHomens' => $porcentagemHomens,
             'porcentagemMulheres' => $porcentagemMulheres,
