@@ -177,6 +177,11 @@
     </div>
     <div class="row">
       <div class="col s12">
+        <div id="graficoEixos" style="height: 400px;"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
         <div id="graficoIdade" style="height: 400px;"></div>
       </div>
     </div>

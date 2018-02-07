@@ -144,7 +144,7 @@
         });
       });
   </script>
-  
+
   <br>
   <div class="row">
     <div class="col s12">
@@ -165,6 +165,11 @@
     </div>
     <div class="col s12 m6">
       <div id="graficoEtnia" style="height: 400px;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div id="graficoEixos" style="height: 400px;"></div>
     </div>
   </div>
   <div class="row">
@@ -355,6 +360,37 @@
             },
         }]
     });
+
+    var graficoEixos = Highcharts.chart('graficoEixos', {
+      chart: { polar: true, type: 'line'},
+      title: { text: 'Parametros/Eixos', x: -45 },
+      credits: { enabled: false },
+      pane: { size: '70%' },
+      xAxis: {
+          categories: ['Individual', 'Familiar', 'Intraescolar', 'Carreira Profissional', 'Área de Formação', 'Institucional'],
+          tickmarkPlacement: 'on',
+          lineWidth: 0
+      },
+      yAxis: {
+          gridLineInterpolation: 'polygon',
+          lineWidth: 0,
+          min: 0
+      },
+      tooltip: { shared: true, pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>' },
+      legend: {
+          align: 'right',
+          verticalAlign: 'top',
+          y: 0,
+          layout: 'vertical'
+      },
+      series: [{
+          name: 'Evasão',
+          data: [50, 50, 30, 75, 30, 50],
+          pointPlacement: 'on'
+      }]
+
+    });
+
   });
   </script>
 @endsection
