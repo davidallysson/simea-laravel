@@ -33,12 +33,28 @@ class ResultadosController extends Controller
         $branco = 0; $preto = 0; $pardo = 0; $indigena = 0; $quilombola = 0;
         $umSalario = 0; $doisSalarios = 0; $tresSalarios = 0; $quatroSalarios = 0;
         $intervalo1519 = 0; $intervalo2024 = 0; $intervalo2529 = 0; $intervalo3034 = 0; $intervalo3539 = 0; $intervalo40 = 0;
+        $individual = 0; $familiar = 0; $intraescolar = 0; $carreira = 0; $formacao = 0; $institucional = 0;
 
         if ($request->aluno_id != "") {
           $aluno = Pessoa::findOrFail($request->aluno_id);
           foreach ($aluno->resultados as $resultado) {
             $pontuacao += $resultado->pontos;
             $quantidadeQuestionarios++;
+
+            if ($resultado->questionario_id == 1) {
+              $individual += $resultado->pontos;
+            } else if ($resultado->questionario_id == 2) {
+              $familiar += $resultado->pontos;
+            } else if ($resultado->questionario_id == 3) {
+              $intraescolar += $resultado->pontos;
+            } else if ($resultado->questionario_id == 4) {
+              $carreira += $resultado->pontos;
+            } else if ($resultado->questionario_id == 5) {
+              $formacao += $resultado->pontos;
+            } else if ($resultado->questionario_id == 6) {
+              $institucional += $resultado->pontos;
+            }
+
           }
           switch ($aluno->raca) {
             case 'Branco':     $branco++; break;
@@ -87,6 +103,21 @@ class ResultadosController extends Controller
             foreach ($aluno->resultados as $resultado) {
               $pontuacao += $resultado->pontos;
               $quantidadeQuestionarios++;
+
+              if ($resultado->questionario_id == 1) {
+                $individual += $resultado->pontos;
+              } else if ($resultado->questionario_id == 2) {
+                $familiar += $resultado->pontos;
+              } else if ($resultado->questionario_id == 3) {
+                $intraescolar += $resultado->pontos;
+              } else if ($resultado->questionario_id == 4) {
+                $carreira += $resultado->pontos;
+              } else if ($resultado->questionario_id == 5) {
+                $formacao += $resultado->pontos;
+              } else if ($resultado->questionario_id == 6) {
+                $institucional += $resultado->pontos;
+              }
+
             }
             switch ($aluno->raca) {
               case 'Branco':     $branco++; break;
@@ -138,6 +169,21 @@ class ResultadosController extends Controller
               foreach ($aluno->resultados as $resultado) {
                 $pontuacao += $resultado->pontos;
                 $quantidadeQuestionarios++;
+
+                if ($resultado->questionario_id == 1) {
+                  $individual += $resultado->pontos;
+                } else if ($resultado->questionario_id == 2) {
+                  $familiar += $resultado->pontos;
+                } else if ($resultado->questionario_id == 3) {
+                  $intraescolar += $resultado->pontos;
+                } else if ($resultado->questionario_id == 4) {
+                  $carreira += $resultado->pontos;
+                } else if ($resultado->questionario_id == 5) {
+                  $formacao += $resultado->pontos;
+                } else if ($resultado->questionario_id == 6) {
+                  $institucional += $resultado->pontos;
+                }
+
               }
               switch ($aluno->raca) {
                 case 'Branco':     $branco++; break;
@@ -192,6 +238,21 @@ class ResultadosController extends Controller
                 foreach ($aluno->resultados as $resultado) {
                   $pontuacao += $resultado->pontos;
                   $quantidadeQuestionarios++;
+
+                  if ($resultado->questionario_id == 1) {
+                    $individual += $resultado->pontos;
+                  } else if ($resultado->questionario_id == 2) {
+                    $familiar += $resultado->pontos;
+                  } else if ($resultado->questionario_id == 3) {
+                    $intraescolar += $resultado->pontos;
+                  } else if ($resultado->questionario_id == 4) {
+                    $carreira += $resultado->pontos;
+                  } else if ($resultado->questionario_id == 5) {
+                    $formacao += $resultado->pontos;
+                  } else if ($resultado->questionario_id == 6) {
+                    $institucional += $resultado->pontos;
+                  }
+
                 }
                 switch ($aluno->raca) {
                   case 'Branco':     $branco++; break;
@@ -249,6 +310,21 @@ class ResultadosController extends Controller
                   foreach ($aluno->resultados as $resultado) {
                     $pontuacao += $resultado->pontos;
                     $quantidadeQuestionarios++;
+
+                    if ($resultado->questionario_id == 1) {
+                      $individual += $resultado->pontos;
+                    } else if ($resultado->questionario_id == 2) {
+                      $familiar += $resultado->pontos;
+                    } else if ($resultado->questionario_id == 3) {
+                      $intraescolar += $resultado->pontos;
+                    } else if ($resultado->questionario_id == 4) {
+                      $carreira += $resultado->pontos;
+                    } else if ($resultado->questionario_id == 5) {
+                      $formacao += $resultado->pontos;
+                    } else if ($resultado->questionario_id == 6) {
+                      $institucional += $resultado->pontos;
+                    }
+
                   }
                   switch ($aluno->raca) {
                     case 'Branco':     $branco++; break;
@@ -299,7 +375,7 @@ class ResultadosController extends Controller
 
         // Caso não sejam encontrados alunos a partir da pesquisa para a geração de gráficos.
         if ($quantidadeAlunos == 0) {
-          return view('resultados.consultar', ['campuses' => Campus::all(), 'msgErro' => "Não foram encontrados alunos nesta pesquisa."]);
+          return Redirect::route('consultar')->with('status', 'Não foram encontrados alunos nesta pesquisa.');
         }
         else {
           $evasometro = $pontuacao / $quantidadeQuestionarios;
@@ -326,7 +402,7 @@ class ResultadosController extends Controller
           $porcentagemIntervalo6 = $intervalo40 * 100 / $quantidadeAlunos;
           return view('resultados.resultado', [
             'campuses' => Campus::all(),
-            'evasometro' => $evasometro,
+            'evasometro' => number_format($evasometro, 2),
             'porcentagemHomens' => $porcentagemHomens,
             'porcentagemMulheres' => $porcentagemMulheres,
             'porcentagemBrancos' => $porcentagemBrancos,
@@ -348,6 +424,12 @@ class ResultadosController extends Controller
             'intervalo3034' => $porcentagemIntervalo4,
             'intervalo3539' => $porcentagemIntervalo5,
             'intervalo40' => $porcentagemIntervalo6,
+            'individual' => $individual,
+            'familiar' => $familiar,
+            'intraescolar' => $intraescolar,
+            'carreira' => $carreira,
+            'formacao' => $formacao,
+            'institucional' => $institucional,
           ]);
         }
     }

@@ -23,7 +23,12 @@ class DatabaseSeeder extends Seeder
         DB::table('eixos')->insert( ['nome' => 'Área de Formação'] );
         DB::table('eixos')->insert( ['nome' => 'Institucional'] );
 
-        DB::table('questionarios')->insert( ['titulo' => 'Questionario Teste', 'disponivel' => 1] );
+        DB::table('questionarios')->insert( ['titulo' => 'Individual', 'disponivel' => 1, 'eixo_id' => 1] );
+        DB::table('questionarios')->insert( ['titulo' => 'Familiar', 'disponivel' => 1, 'eixo_id' => 2] );
+        DB::table('questionarios')->insert( ['titulo' => 'Intraescolar', 'disponivel' => 1, 'eixo_id' => 3] );
+        DB::table('questionarios')->insert( ['titulo' => 'Carreira Profissional', 'disponivel' => 1, 'eixo_id' => 4] );
+        DB::table('questionarios')->insert( ['titulo' => 'Área de Formação', 'disponivel' => 1, 'eixo_id' => 5] );
+        DB::table('questionarios')->insert( ['titulo' => 'Institucional', 'disponivel' => 1, 'eixo_id' => 6] );
 
         DB::table('users')->insert([
             'name' => 'David Allysson Pereira Moreira',

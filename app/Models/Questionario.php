@@ -12,7 +12,7 @@ class Questionario extends Model
    * @var array
    */
   protected $fillable = [
-      'titulo', 'disponivel'
+      'titulo', 'disponivel', 'eixo_id'
   ];
 
   public function resultado()
@@ -23,6 +23,11 @@ class Questionario extends Model
   public function questoes()
   {
       return $this->hasMany('App\Models\Questao');
+  }
+
+  public function eixo()
+  {
+      return $this->belongsTo('App\Models\Eixo');
   }
 
 }

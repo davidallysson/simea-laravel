@@ -146,46 +146,47 @@
       });
   </script>
 
-  @if( !empty($msgErro) )
-    <div class="row">
-      <div class="col s12">
-        <h4 class="header">{{ $msgErro }}</h4>
-      </div>
+  <br>
+  <div class="row">
+    <div class="col s12">
+      <div id="evasometro" style="height: 200px;"></div>
     </div>
-  @else
-    <br>
-    <div class="row">
-      <div class="col s12">
-        <div id="evasometro" style="height: 200px;"></div>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div id="graficoRenda" style="height: 400px;"></div>
     </div>
-    <div class="row">
-      <div class="col s12 m6">
-        <div id="graficoRenda" style="height: 400px;"></div>
-      </div>
-      <div class="col s12 m6">
-        <div id="graficoEstadoCivil" style="height: 400px;"></div>
-      </div>
+    <div class="col s12 m6">
+      <div id="graficoEstadoCivil" style="height: 400px;"></div>
     </div>
-    <div class="row">
-      <div class="col s12 m6">
-        <div id="graficoSexo" style="height: 400px;"></div>
-      </div>
-      <div class="col s12 m6">
-        <div id="graficoEtnia" style="height: 400px;"></div>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div id="graficoSexo" style="height: 400px;"></div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <div id="graficoEixos" style="height: 400px;"></div>
-      </div>
+    <div class="col s12 m6">
+      <div id="graficoEtnia" style="height: 400px;"></div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <div id="graficoIdade" style="height: 400px;"></div>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div id="graficoEixos" style="height: 400px;"></div>
     </div>
-    <br>
-  @endif
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div id="graficoIdade" style="height: 400px;"></div>
+    </div>
+  </div>
+  <br>
   <script type="text/javascript" src="{{ asset('js/graficos.js') }}"></script>
+
+  @if(session('status'))
+    <script type="text/javascript">
+      $(document).ready(function(){
+        M.toast({html: ' <?= session('status') ?> '});
+      });
+    </script>
+  @endif
+  
 @endsection

@@ -17,6 +17,8 @@ class CreateQuestionariosTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->boolean('disponivel');
+            $table->integer('eixo_id')->unsigned();
+            $table->foreign('eixo_id')->references('id')->on('eixos')->onDelete('cascade');
             $table->timestamps();
         });
     }

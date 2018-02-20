@@ -385,7 +385,7 @@
       },
       series: [{
           name: 'Evasão',
-          data: [50, 50, 30, 75, 30, 50],
+          data: [<?=$individual?>, <?=$familiar?>, <?=$intraescolar?>, <?=$carreira?>, <?=$formacao?>, <?=$institucional?>],
           pointPlacement: 'on'
       }]
 

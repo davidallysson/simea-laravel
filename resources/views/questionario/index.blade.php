@@ -44,6 +44,7 @@
                 <td>Não existem questionários cadastrados no sistema.</td>
                 <td></td>
                 <td></td>
+                <td></td>
               </tr>
             @endforelse
           </tbody>
@@ -64,5 +65,5 @@
       });
     </script>
   @endif
-  
+
 @endsection

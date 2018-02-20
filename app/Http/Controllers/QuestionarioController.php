@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Eixo;
 use App\Models\Questionario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -44,7 +45,7 @@ class QuestionarioController extends Controller
      */
     public function create()
     {
-        return view('questionario.create');
+        return view('questionario.create', ['eixos' => Eixo::all()]);
     }
 
     /**
@@ -57,6 +58,7 @@ class QuestionarioController extends Controller
     {
         $questionario = new Questionario;
         $questionario->titulo = $request->titulo;
+        $questionario->eixo_id = $request->eixo_id;
         if ($request->disponivel == "on") {
           $questionario->disponivel = 1;
         } else {
@@ -86,7 +88,7 @@ class QuestionarioController extends Controller
      */
     public function edit(int $id)
     {
-        return view('questionario.edit', ['questionario' => Questionario::findOrFail($id)]);
+        return view('questionario.edit', ['questionario' => Questionario::findOrFail($id), 'eixos' => Eixo::all()]);
     }
 
     /**
@@ -100,6 +102,7 @@ class QuestionarioController extends Controller
     {
         $questionario = Questionario::findOrFail($id);
         $questionario->titulo = $request->titulo;
+        $questionario->eixo_id = $request->eixo_id;
         if ($request->disponivel == "on") {
           $questionario->disponivel = 1;
         } else {

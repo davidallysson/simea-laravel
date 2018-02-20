@@ -17,6 +17,17 @@
           </div>
         </div>
         <div class="row">
+          <div class="input-field col s12 m6">
+            <select id="eixo_id" name="eixo_id">
+              <option value="" disabled selected>Escolha uma opção</option>
+              @foreach ($eixos as $eixo)
+                <option value="{{ $eixo->id }}">{{ $eixo->nome }}</option>
+              @endforeach
+            </select>
+            <label>Eixo</label>
+          </div>
+        </div>
+        <div class="row">
           <div class="col s12 m6">
             <div class="switch">
               <label>
