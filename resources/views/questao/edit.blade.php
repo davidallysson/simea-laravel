@@ -17,17 +17,6 @@
             <label for="titulo">Questão</label>
           </div>
 
-          <div class="input-field col s12 m4">
-            <select id="eixo_id" name="eixo_id">
-              <option value="" disabled selected>Escolha um eixo</option>
-              @foreach ($eixos as $eixo)
-                <option value="{{ $eixo->id }}" {{ $eixo->id == $questao->eixo_id ? 'selected' : '' }}>
-                  {{ $eixo->nome }}
-                </option>
-              @endforeach
-            </select>
-            <label>Eixo</label>
-          </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m4">

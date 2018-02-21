@@ -47,7 +47,7 @@ class QuestaoController extends Controller
      */
     public function create()
     {
-        return view('questao.create', ['eixos' => Eixo::all(), 'questionarios' => Questionario::all()]);
+        return view('questao.create', ['questionarios' => Questionario::all()]);
     }
 
     /**
@@ -60,7 +60,6 @@ class QuestaoController extends Controller
     {
         $questao = new Questao;
         $questao->titulo = $request->titulo;
-        $questao->eixo_id = $request->eixo_id;
         $questao->questionario_id = $request->questionario_id;
         $questao->save();
 
@@ -120,7 +119,6 @@ class QuestaoController extends Controller
     public function edit(int $id)
     {
       return view('questao.edit', [
-        'eixos' => Eixo::all(),
         'questionarios' => Questionario::all(),
         'questao' => Questao::findOrFail($id)
       ]);
@@ -137,7 +135,6 @@ class QuestaoController extends Controller
     {
         $questao = Questao::findOrFail($id);
         $questao->titulo = $request->titulo;
-        $questao->eixo_id = $request->eixo_id;
         $questao->questionario_id = $request->questionario_id;
         $questao->save();
 

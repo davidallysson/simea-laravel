@@ -22,7 +22,7 @@
             @forelse ($questoes as $questao)
             <tr>
               <td>{{ $questao->titulo }}</td>
-              <td>{{ $questao->eixo->nome }}</td>
+              <td>{{ $questao->questionario->eixo->nome }}</td>
               <td>
                 <a href="{{ route('questao.show', $questao->id) }}" class="btn btn-flat waves-effect waves-green">
                   <i class="fas fa-eye fa-lg"></i>

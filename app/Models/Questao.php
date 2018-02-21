@@ -12,13 +12,8 @@ class Questao extends Model
    * @var array
    */
   protected $fillable = [
-      'titulo', 'eixo_id', 'questionario_id'
+      'titulo', 'questionario_id'
   ];
-
-  public function eixo()
-  {
-      return $this->belongsTo('App\Models\Eixo');
-  }
 
   public function alternativas()
   {
