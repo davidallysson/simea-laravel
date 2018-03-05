@@ -20,7 +20,7 @@
             <span><b>{{ $questao->titulo }}</b></span><br>
             <br>
             @foreach ($questao->alternativas as $alternativa)
-              <span><b>{{ $alternativa->letra }})</b> {{ $alternativa->alternativa }}</span><br>
+              <span><b> &bull; </b> {{ $alternativa->alternativa }}</span><br>
               <p>
                 <label> Menor prioridade --- </label>
                 <label>
