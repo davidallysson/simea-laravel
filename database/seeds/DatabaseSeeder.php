@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         DB::table('tiposdeusers')->insert( ['descricao' => 'administrador'] );
 
         DB::table('campuses')->insert( ['nome' => 'Natal-Central'] );
+        DB::table('diretorias')->insert( ['nome' => 'DIATINF', 'campus_id' => 1] );
+        DB::table('cursos')->insert( ['nome' => 'TADS', 'diretoria_id' => 1] );
+        DB::table('turmas')->insert( ['nome' => 'TADS 2018.1', 'curso_id' => 1] );
 
         DB::table('eixos')->insert( ['nome' => 'Individual'] );
         DB::table('eixos')->insert( ['nome' => 'Familiar'] );
