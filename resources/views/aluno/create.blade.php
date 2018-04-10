@@ -53,7 +53,7 @@
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input class="datepicker" id="dataNascimento" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" type="text" name="dataNascimento" placeholder="AAAA-MM-DD" title="O formato deve ser AAAA-MM-DD." required>
+            <input id="dataNascimento" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" type="text" name="dataNascimento" placeholder="AAAA-MM-DD" title="O formato deve ser AAAA-MM-DD." required>
             <label for="dataNascimento">Data de Nascimento</label>
           </div>
         </div>
