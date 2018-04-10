@@ -8,8 +8,7 @@
   <div class="section">
     <br>
     <div class="row">
-      <div class="col s12 m10">
-        <label>As perguntas devem ser respondidas por ordem de prioridade. Selecione "4" para a primeira opção que você escolheria como resposta, "3" para a segunda opção que você escolheria como resposta, "2" para a terceira opção que você escolheria como resposta e "1" para a última opção que você escolheria.</label><br>
+      <div class="col s12 m8">
         <br>
         <form action="{{ route('quiz.resultado') }}" method="POST">
           {{ csrf_field() }}
@@ -22,20 +21,18 @@
             @foreach ($questao->alternativas as $alternativa)
               <span><b> &bull; </b> {{ $alternativa->alternativa }}</span><br>
               <p>
-                <label> Menor prioridade --- </label>
                 <label>
-                  <span>1°</span> <input name="alternativa{{ $loop->index }}" value="1" type="radio" required />
+                  <input name="alternativa{{ $loop->index }}" value="1" type="radio" required /> <span>1°</span>
                 </label>
                 <label>
-                  <span>2°</span> <input name="alternativa{{ $loop->index }}" value="2" type="radio" required />
+                  <input name="alternativa{{ $loop->index }}" value="2" type="radio" required /> <span>2°</span>
                 </label>
                 <label>
-                  <span>3°</span> <input name="alternativa{{ $loop->index }}" value="3" type="radio" required />
+                  <input name="alternativa{{ $loop->index }}" value="3" type="radio" required /> <span>3°</span>
                 </label>
                 <label>
-                  <span>4°</span> <input name="alternativa{{ $loop->index }}" value="4" type="radio" required />
+                  <input name="alternativa{{ $loop->index }}" value="4" type="radio" required /> <span>4°</span>
                 </label>
-                <label> --- Maior prioridade</label>
               </p>
             @endforeach
             <br>
@@ -47,6 +44,10 @@
           @endif
           <input class="btn btn-primary" type="submit" value="Continuar"/>
         </form>
+      </div>
+      <div class="col s12 m3">
+        <br><br><br><br>
+        <b><p>As perguntas devem ser respondidas por ordem de prioridade. Selecione "4" para a primeira opção que você escolheria como resposta, "3" para a segunda opção que você escolheria como resposta, "2" para a terceira opção que você escolheria como resposta e "1" para a última opção que você escolheria.</p></b>
       </div>
     </div>
     <br>
