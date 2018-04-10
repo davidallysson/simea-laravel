@@ -24,16 +24,16 @@
               <p>
                 <label> Menor prioridade --- </label>
                 <label>
-                  <input name="alternativa{{ $loop->index }}" value="1" type="radio" required /> <span>1</span>
+                  <span>1°</span> <input name="alternativa{{ $loop->index }}" value="1" type="radio" required />
                 </label>
                 <label>
-                  <input name="alternativa{{ $loop->index }}" value="2" type="radio" required /> <span>2</span>
+                  <span>2°</span> <input name="alternativa{{ $loop->index }}" value="2" type="radio" required />
                 </label>
                 <label>
-                  <input name="alternativa{{ $loop->index }}" value="3" type="radio" required /> <span>3</span>
+                  <span>3°</span> <input name="alternativa{{ $loop->index }}" value="3" type="radio" required />
                 </label>
                 <label>
-                  <input name="alternativa{{ $loop->index }}" value="4" type="radio" required /> <span>4</span>
+                  <span>4°</span> <input name="alternativa{{ $loop->index }}" value="4" type="radio" required />
                 </label>
                 <label> --- Maior prioridade</label>
               </p>
