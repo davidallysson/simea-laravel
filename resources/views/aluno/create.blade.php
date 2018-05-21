@@ -22,12 +22,12 @@
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input placeholder="000.000.000" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}" title="O formato deve ser '000.000.000'." id="rg" type="text" name="rg" required>
+            <input id="rg" class="rg" placeholder="000.000.000" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}" title="O formato deve ser '000.000.000'." type="text" name="rg" data-mask="000.000.000" data-mask-reverse="true" required>
             <label for="rg">RG</label>
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input placeholder="000.000.000-00" id="cpf" type="text" name="cpf" required>
+            <input placeholder="000.000.000-00" id="cpf" type="text" name="cpf" class="cpf" required>
             <label for="cpf">CPF</label>
           </div>
         </div>
@@ -48,12 +48,12 @@
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input placeholder="(99) 91234-5678" id="telefone" type="text" name="telefone" required>
+            <input id="telefone" type="text" name="telefone" class="phone" placeholder="(99) 91234-5678" required>
             <label for="telefone">Telefone</label>
           </div>
 
           <div class="input-field col s12 m6 l2">
-            <input id="dataNascimento" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" type="text" name="dataNascimento" placeholder="AAAA-MM-DD" title="O formato deve ser AAAA-MM-DD." required>
+            <input id="dataNascimento" class="date" type="text" name="dataNascimento" placeholder="DD/MM/AAAA" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}" title="O formato deve ser DD/MM/AAAA." required>
             <label for="dataNascimento">Data de Nascimento</label>
           </div>
         </div>

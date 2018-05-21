@@ -78,7 +78,11 @@ class PessoaController extends Controller
         $aluno->sexo = $request->sexo;
         $aluno->telefone = $request->telefone;
         $aluno->matricula = $request->matricula;
-        $aluno->dataNascimento = $request->dataNascimento;
+
+        $arrayDate = explode("/", $request->dataNascimento);
+        $dtNascimento = $arrayDate[2] . "-" . $arrayDate[1] . "-" . $arrayDate[0];
+        $aluno->dataNascimento = $dtNascimento;
+        
         $aluno->estadoCivil = $request->estadoCivil;
         $aluno->raca = $request->raca;
         $aluno->renda = $request->renda;

@@ -21,6 +21,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <script src="{{ asset('js/materialize.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
