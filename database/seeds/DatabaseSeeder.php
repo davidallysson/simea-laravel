@@ -46,6 +46,12 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('123'),
         //     'tipo_id' => 2
         // ]);
+        DB::table('users')->insert([
+            'name' => 'Atanice Miranda',
+            'email' => 'atanice@simea.ifrn.local',
+            'password' => bcrypt('123'),
+            'tipo_id' => 2
+        ]);
 
     }
 }
